@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Estet</string>
+
+
+    <string name="title_questionnaire_not_filled">Чтобы приступить к выполнению заданий, заполни анкету</string>
+
+    <string name="action_fill_questionnaire">Заполнить анкету</string>
 </resources>

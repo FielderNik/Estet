@@ -32,30 +32,8 @@ class AppScreenState(
     val currentDestination: NavDestination?
         @Composable get() = navController.currentBackStackEntryAsState().value?.destination
 
-    val shouldShowBottomBar: MutableState<Boolean> = mutableStateOf(true)
+    var shouldShowBottomBar: MutableState<Boolean> = mutableStateOf(true)
     val topLevelDestinations: List<TopLevelDestination> = TopLevelDestination.values().asList()
-
-    /*fun navigate(destination: AppNavigationDestination, route: String? = null) {
-        trace("Navigation: $destination") {
-            if (destination is TopLevelDestination) {
-                navController.navigate(route ?: destination.route) {
-                    // Pop up to the start destination of the graph to
-                    // avoid building up a large stack of destinations
-                    // on the back stack as users select items
-                    popUpTo(navController.graph.findStartDestination().id) {
-                        saveState = true
-                    }
-                    // Avoid multiple copies of the same destination when
-                    // reselecting the same item
-                    launchSingleTop = true
-                    // Restore state when reselecting a previously selected item
-//                    restoreState = true
-                }
-            } else {
-                navController.navigate(route ?: destination.route)
-            }
-        }
-    }*/
 
     fun navigateToTopLevelDestination(topLevelDestination: TopLevelDestination) {
         trace("Navigation: ${topLevelDestination.route}") {

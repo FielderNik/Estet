@@ -5,10 +5,21 @@ import com.culture.estet.domain.models.Question
 
 sealed class TasksScreenState {
 
-    object QuestionnaireNotFilled : TasksScreenState()
+    data class QuestionnaireNotFilled(
+        val userId: String? = null,
+    ) : TasksScreenState()
 
     data class QuestionnaireFilled(
         val questions: List<Question>
-    )
+    ) : TasksScreenState()
+}
+
+sealed class TasksEffect {
+
+}
+
+
+sealed class TasksAction {
+    object Initialize : TasksAction()
 }
 
