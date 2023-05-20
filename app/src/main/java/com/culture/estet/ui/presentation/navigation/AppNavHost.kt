@@ -4,12 +4,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.culture.estet.ui.presentation.navigation.courses.createCoursesGraph
+import com.culture.estet.ui.presentation.navigation.feed.createFeedGraph
+import com.culture.estet.ui.presentation.navigation.map.createMapGraph
+import com.culture.estet.ui.presentation.navigation.tasks.TasksDestination
+import com.culture.estet.ui.presentation.navigation.tasks.createTasksGraph
+import com.culture.estet.ui.presentation.navigation.tournament.createTournamentGraph
 
 @Composable
 fun AppNavHost(
     modifier: Modifier = Modifier,
     navHostController: NavHostController,
-    startDestination: String = EventsDestination.route
+    startDestination: String = TasksDestination.route
 ) {
     NavHost(
         modifier = modifier,
@@ -17,7 +23,11 @@ fun AppNavHost(
         startDestination = startDestination
     ) {
         eventsGraph()
-
+        createTasksGraph()
+        createTournamentGraph()
+        createMapGraph()
+        createCoursesGraph()
+        createFeedGraph()
 
     }
 }
