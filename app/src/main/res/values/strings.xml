@@ -3,6 +3,23 @@
 
 
     <string name="title_questionnaire_not_filled">Чтобы приступить к выполнению заданий, заполни анкету</string>
+    <string name="title_questionnaire_choice_art">Какое искусство вас интересует?</string>
+    <string name="title_questionnaire_choice_level">Ваш уровень?</string>
+    <string name="title_questionnaire_choice_goal">Выбор цели:</string>
+    <string name="title_questionnaire_choice_art_theatre">Театр</string>
+    <string name="title_questionnaire_choice_art_dance">Танцы</string>
+    <string name="title_questionnaire_choice_art_painting">Живопись</string>
+    <string name="title_questionnaire_choice_art_music">Музыка</string>
+    <string name="title_questionnaire_choice_level_beginner">Новичок</string>
+    <string name="title_questionnaire_choice_level_advanced">Продвинутый</string>
+    <string name="title_questionnaire_choice_level_professional">Профессионал</string>
+    <string name="title_questionnaire_choice_goal_just_like_this">Просто так</string>
+    <string name="title_questionnaire_choice_goal_go_to_school">Собираюсь в МШИ</string>
+    <string name="title_questionnaire_choice_goal_parent">Родитель</string>
+    <string name="title_questionnaire_choice_goal_already_study">Учусь в МШИ</string>
+    <string name="title_questionnaire_choice_goal_for_self_development">Для саморазвития</string>
 
     <string name="action_fill_questionnaire">Заполнить анкету</string>
+
+
 </resources>
