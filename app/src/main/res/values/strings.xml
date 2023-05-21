@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Estet</string>
 
+    <string name="title_dance">Танцы</string>
+    <string name="title_theatre">Театр</string>
+    <string name="title_painting">Живопись</string>
+    <string name="title_music">Музыка</string>
+
 
     <string name="title_questionnaire_not_filled">Чтобы приступить к выполнению заданий, заполни анкету</string>
     <string name="title_questionnaire_choice_art">Какое искусство вас интересует?</string>
@@ -19,7 +24,10 @@
     <string name="title_questionnaire_choice_goal_already_study">Учусь в МШИ</string>
     <string name="title_questionnaire_choice_goal_for_self_development">Для саморазвития</string>
 
+    <string name="title_task_count_questions_completed">выполнено %1$s из %2$s</string>
+
     <string name="action_fill_questionnaire">Заполнить анкету</string>
+    <string name="action_start_task">Поехали!</string>
 
 
 </resources>
