@@ -9,6 +9,7 @@ import com.culture.estet.ui.presentation.navigation.feed.createFeedGraph
 import com.culture.estet.ui.presentation.navigation.map.createMapGraph
 import com.culture.estet.ui.presentation.navigation.tasks.TasksDestination
 import com.culture.estet.ui.presentation.navigation.tasks.createQuestionnaireGraph
+import com.culture.estet.ui.presentation.navigation.tasks.createQuestionsGraph
 import com.culture.estet.ui.presentation.navigation.tasks.createTasksGraph
 import com.culture.estet.ui.presentation.navigation.tournament.createTournamentGraph
 
@@ -31,6 +32,7 @@ fun AppNavHost(
         createFeedGraph()
 
         createQuestionnaireGraph()
+        createQuestionsGraph()
 
     }
 }

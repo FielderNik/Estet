@@ -29,6 +29,25 @@ class QuestionnaireViewModel @Inject constructor(
             is QuestionnaireAction.SelectLevelType -> {
                 updateLevelType(currentState, action.levelType)
             }
+
+            QuestionnaireAction.CheckParametersAndStartTask -> {
+                checkParametersAndStartTask(currentState)
+            }
+
+            is QuestionnaireAction.Initialize -> {
+                updateUserId(currentState, action.userId)
+            }
+        }
+    }
+
+    private suspend fun checkParametersAndStartTask(currentState: QuestionnaireScreenState) {
+        val userId = currentState.userId
+        val artType = currentState.art
+        val levelType = currentState.level
+        if (userId != null && artType != null && levelType != null) {
+            sendEffect(QuestionnaireEffect.StartTask(userId, artType, levelType))
+        } else {
+            //todo обработать ошибку
         }
     }
 
@@ -62,6 +81,10 @@ class QuestionnaireViewModel @Inject constructor(
         } else {
             setState(currentState)
         }
+    }
 
+    private suspend fun updateUserId(currentState: QuestionnaireScreenState, userId: String) {
+        val updatedState = currentState.copy(userId = userId)
+        setState(updatedState)
     }
 }

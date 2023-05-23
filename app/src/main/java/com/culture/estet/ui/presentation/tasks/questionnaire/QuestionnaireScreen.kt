@@ -20,6 +20,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ColorMatrix
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -27,17 +28,21 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.flowWithLifecycle
+import androidx.navigation.NavHostController
 import com.culture.estet.R
 import com.culture.estet.domain.models.tasks.TasksArtType
 import com.culture.estet.domain.models.tasks.TasksGoalType
 import com.culture.estet.domain.models.tasks.TasksLevelType
 import com.culture.estet.ui.presentation.localcomposition.LocalAppScreenState
+import com.culture.estet.ui.presentation.navigation.tasks.QuestionsDestination
 
 @Composable
 fun QuestionnaireScreen(
     userId: String,
     viewModel: QuestionnaireViewModel = hiltViewModel()
 ) {
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
     val appState = LocalAppScreenState.current
     val state = viewModel.state.collectAsState()
 
@@ -45,16 +50,38 @@ fun QuestionnaireScreen(
         appState.shouldShowBottomBar.value = false
     }
 
+    LaunchedEffect(Unit) {
+        viewModel.sendAction(QuestionnaireAction.Initialize(userId))
+    }
+
+    LaunchedEffect(Unit) {
+        viewModel.effect.flowWithLifecycle(lifecycle).collect { effect ->
+            handleEffects(effect, appState.navController)
+        }
+    }
+
 
     QuestionnaireScreenContent(
+        userId = userId,
         state = state.value,
         sendAction = viewModel::sendAction
     )
 }
 
+private suspend fun handleEffects(effect: QuestionnaireEffect, navController: NavHostController) {
+    when (effect) {
+        is QuestionnaireEffect.StartTask -> {
+            val route = QuestionsDestination.navigationRoute(userId = effect.userId, artType = effect.artType, levelType = effect.levelType)
+            navController.navigate(route)
+        }
+    }
+
+}
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun QuestionnaireScreenContent(
+    userId: String,
     state: QuestionnaireScreenState,
     sendAction: (QuestionnaireAction) -> Unit
 ) {
@@ -74,12 +101,14 @@ private fun QuestionnaireScreenContent(
                         sendAction = sendAction
                     )
                 }
+
                 1 -> {
                     LevelType(
                         selectedLevel = state.level,
                         sendAction = sendAction,
                     )
                 }
+
                 else -> {
                     GoalScreen(
                         selectedGoals = state.goals,
@@ -214,7 +243,7 @@ fun RowScope.ArtTypeItem(
             contentDescription = null,
             colorFilter = if (!isSelected) ColorFilter.colorMatrix(matrix) else null
         )
-        Text(text= title, fontSize = 16.sp)
+        Text(text = title, fontSize = 16.sp)
     }
 }
 
@@ -247,7 +276,7 @@ fun RowScope.GoalTypeItem(
         Text(
             modifier = Modifier.widthIn(max = 120.dp),
             color = if (isSelected) Color.Black else Color.Black.copy(alpha = 0.7f),
-            text= title,
+            text = title,
             fontSize = 16.sp,
             textAlign = TextAlign.Center
         )
@@ -416,7 +445,7 @@ private fun GoalScreen(
                 .height(56.dp),
             enabled = isStartButtonEnabled,
             onClick = {
-
+                sendAction(QuestionnaireAction.CheckParametersAndStartTask)
             }
         ) {
             Text(text = stringResource(id = R.string.action_start_task).uppercase())

@@ -25,9 +25,14 @@
     <string name="title_questionnaire_choice_goal_for_self_development">Для саморазвития</string>
 
     <string name="title_task_count_questions_completed">выполнено %1$s из %2$s</string>
+    <string name="dialog_close_task_title">Закрыть задание</string>
+    <string name="dialog_close_task_message">Вы уверены, что хотите покинуть задание?</string>
+    <string name="dialog_close_task_question">Закрыть?</string>
 
     <string name="action_fill_questionnaire">Заполнить анкету</string>
     <string name="action_start_task">Поехали!</string>
+    <string name="action_stay">Остаться</string>
+    <string name="action_close">Закрыть</string>
 
 
 </resources>
