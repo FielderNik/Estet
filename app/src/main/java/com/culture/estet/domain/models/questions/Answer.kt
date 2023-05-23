@@ -1,4 +1,4 @@
-package com.culture.estet.domain.models
+package com.culture.estet.domain.models.questions
 
 data class Answer(
     val id: String,
