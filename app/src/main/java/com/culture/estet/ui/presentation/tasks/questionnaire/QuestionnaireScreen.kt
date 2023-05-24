@@ -31,9 +31,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.NavHostController
 import com.culture.estet.R
-import com.culture.estet.domain.models.tasks.TasksArtType
-import com.culture.estet.domain.models.tasks.TasksGoalType
-import com.culture.estet.domain.models.tasks.TasksLevelType
+import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.tasks.TaskGoalType
+import com.culture.estet.domain.models.tasks.TaskLevelType
 import com.culture.estet.ui.presentation.localcomposition.LocalAppScreenState
 import com.culture.estet.ui.presentation.navigation.tasks.QuestionsDestination
 
@@ -144,7 +144,7 @@ private fun QuestionnaireScreenContent(
 
 @Composable
 private fun ArtType(
-    selectedArt: TasksArtType?,
+    selectedArt: TaskArtType?,
     sendAction: (QuestionnaireAction) -> Unit,
 ) {
     Column(
@@ -170,19 +170,19 @@ private fun ArtType(
             ArtTypeItem(
                 title = stringResource(id = R.string.title_questionnaire_choice_art_theatre),
                 iconId = R.drawable.image_theatre,
-                isSelected = selectedArt == TasksArtType.THEATRE,
+                isSelected = selectedArt == TaskArtType.THEATRE,
                 selectableRole = Role.RadioButton,
                 onClick = {
-                    sendAction(QuestionnaireAction.SelectArtType(TasksArtType.THEATRE))
+                    sendAction(QuestionnaireAction.SelectArtType(TaskArtType.THEATRE))
                 }
             )
             ArtTypeItem(
                 title = stringResource(id = R.string.title_questionnaire_choice_art_music),
                 iconId = R.drawable.image_music,
-                isSelected = selectedArt == TasksArtType.MUSIC,
+                isSelected = selectedArt == TaskArtType.MUSIC,
                 selectableRole = Role.RadioButton,
                 onClick = {
-                    sendAction(QuestionnaireAction.SelectArtType(TasksArtType.MUSIC))
+                    sendAction(QuestionnaireAction.SelectArtType(TaskArtType.MUSIC))
                 }
             )
         }
@@ -195,19 +195,19 @@ private fun ArtType(
             ArtTypeItem(
                 title = stringResource(id = R.string.title_questionnaire_choice_art_dance),
                 iconId = R.drawable.image_dance,
-                isSelected = selectedArt == TasksArtType.DANCE,
+                isSelected = selectedArt == TaskArtType.DANCE,
                 selectableRole = Role.RadioButton,
                 onClick = {
-                    sendAction(QuestionnaireAction.SelectArtType(TasksArtType.DANCE))
+                    sendAction(QuestionnaireAction.SelectArtType(TaskArtType.DANCE))
                 }
             )
             ArtTypeItem(
                 title = stringResource(id = R.string.title_questionnaire_choice_art_painting),
                 iconId = R.drawable.image_painting,
-                isSelected = selectedArt == TasksArtType.PAINTING,
+                isSelected = selectedArt == TaskArtType.PAINTING,
                 selectableRole = Role.RadioButton,
                 onClick = {
-                    sendAction(QuestionnaireAction.SelectArtType(TasksArtType.PAINTING))
+                    sendAction(QuestionnaireAction.SelectArtType(TaskArtType.PAINTING))
                 }
             )
         }
@@ -285,7 +285,7 @@ fun RowScope.GoalTypeItem(
 
 @Composable
 private fun LevelType(
-    selectedLevel: TasksLevelType?,
+    selectedLevel: TaskLevelType?,
     sendAction: (QuestionnaireAction) -> Unit,
 ) {
 
@@ -311,19 +311,19 @@ private fun LevelType(
             ArtTypeItem(
                 title = stringResource(id = R.string.title_questionnaire_choice_level_beginner),
                 iconId = R.drawable.image_beginner,
-                isSelected = selectedLevel == TasksLevelType.BEGINNER,
+                isSelected = selectedLevel == TaskLevelType.BEGINNER,
                 selectableRole = Role.RadioButton,
                 onClick = {
-                    sendAction(QuestionnaireAction.SelectLevelType(TasksLevelType.BEGINNER))
+                    sendAction(QuestionnaireAction.SelectLevelType(TaskLevelType.BEGINNER))
                 }
             )
             ArtTypeItem(
                 title = stringResource(id = R.string.title_questionnaire_choice_level_advanced),
                 iconId = R.drawable.image_advanced,
-                isSelected = selectedLevel == TasksLevelType.ADVANCED,
+                isSelected = selectedLevel == TaskLevelType.ADVANCED,
                 selectableRole = Role.RadioButton,
                 onClick = {
-                    sendAction(QuestionnaireAction.SelectLevelType(TasksLevelType.ADVANCED))
+                    sendAction(QuestionnaireAction.SelectLevelType(TaskLevelType.ADVANCED))
                 }
             )
         }
@@ -334,12 +334,12 @@ private fun LevelType(
             verticalAlignment = Alignment.CenterVertically
         ) {
             ArtTypeItem(
-                title = stringResource(id = R.string.title_questionnaire_choice_level_professional),
+                title = stringResource(id = R.string.title_questionnaire_choice_level_expert),
                 iconId = R.drawable.image_professional,
-                isSelected = selectedLevel == TasksLevelType.EXPERT,
+                isSelected = selectedLevel == TaskLevelType.EXPERT,
                 selectableRole = Role.RadioButton,
                 onClick = {
-                    sendAction(QuestionnaireAction.SelectLevelType(TasksLevelType.EXPERT))
+                    sendAction(QuestionnaireAction.SelectLevelType(TaskLevelType.EXPERT))
                 }
             )
 
@@ -351,7 +351,7 @@ private fun LevelType(
 
 @Composable
 private fun GoalScreen(
-    selectedGoals: Set<TasksGoalType>,
+    selectedGoals: Set<TaskGoalType>,
     isStartButtonEnabled: Boolean,
     sendAction: (QuestionnaireAction) -> Unit
 ) {
@@ -378,19 +378,19 @@ private fun GoalScreen(
             GoalTypeItem(
                 title = stringResource(id = R.string.title_questionnaire_choice_goal_just_like_this),
                 iconId = R.drawable.image_violet_circle,
-                isSelected = selectedGoals.contains(TasksGoalType.JUST_LIKE_THIS),
+                isSelected = selectedGoals.contains(TaskGoalType.JUST_LIKE_THIS),
                 selectableRole = Role.Checkbox,
                 onClick = {
-                    sendAction(QuestionnaireAction.SelectGoalType(TasksGoalType.JUST_LIKE_THIS))
+                    sendAction(QuestionnaireAction.SelectGoalType(TaskGoalType.JUST_LIKE_THIS))
                 }
             )
             GoalTypeItem(
                 title = stringResource(id = R.string.title_questionnaire_choice_goal_go_to_school),
                 iconId = R.drawable.image_yellow_circle,
-                isSelected = selectedGoals.contains(TasksGoalType.GO_TO_SCHOOL),
+                isSelected = selectedGoals.contains(TaskGoalType.GO_TO_SCHOOL),
                 selectableRole = Role.Checkbox,
                 onClick = {
-                    sendAction(QuestionnaireAction.SelectGoalType(TasksGoalType.GO_TO_SCHOOL))
+                    sendAction(QuestionnaireAction.SelectGoalType(TaskGoalType.GO_TO_SCHOOL))
                 }
             )
         }
@@ -403,19 +403,19 @@ private fun GoalScreen(
             GoalTypeItem(
                 title = stringResource(id = R.string.title_questionnaire_choice_goal_parent),
                 iconId = R.drawable.image_green_circle,
-                isSelected = selectedGoals.contains(TasksGoalType.PARENT),
+                isSelected = selectedGoals.contains(TaskGoalType.PARENT),
                 selectableRole = Role.Checkbox,
                 onClick = {
-                    sendAction(QuestionnaireAction.SelectGoalType(TasksGoalType.PARENT))
+                    sendAction(QuestionnaireAction.SelectGoalType(TaskGoalType.PARENT))
                 }
             )
             GoalTypeItem(
                 title = stringResource(id = R.string.title_questionnaire_choice_goal_already_study),
                 iconId = R.drawable.image_yellow_green_circle,
-                isSelected = selectedGoals.contains(TasksGoalType.ALREADY_STUDY),
+                isSelected = selectedGoals.contains(TaskGoalType.ALREADY_STUDY),
                 selectableRole = Role.Checkbox,
                 onClick = {
-                    sendAction(QuestionnaireAction.SelectGoalType(TasksGoalType.ALREADY_STUDY))
+                    sendAction(QuestionnaireAction.SelectGoalType(TaskGoalType.ALREADY_STUDY))
                 }
             )
 
@@ -430,10 +430,10 @@ private fun GoalScreen(
             GoalTypeItem(
                 title = stringResource(id = R.string.title_questionnaire_choice_goal_for_self_development),
                 iconId = R.drawable.image_light_yellow_circle,
-                isSelected = selectedGoals.contains(TasksGoalType.FOR_SELF_DEVELOPMENT),
+                isSelected = selectedGoals.contains(TaskGoalType.FOR_SELF_DEVELOPMENT),
                 selectableRole = Role.Checkbox,
                 onClick = {
-                    sendAction(QuestionnaireAction.SelectGoalType(TasksGoalType.FOR_SELF_DEVELOPMENT))
+                    sendAction(QuestionnaireAction.SelectGoalType(TaskGoalType.FOR_SELF_DEVELOPMENT))
                 }
             )
         }

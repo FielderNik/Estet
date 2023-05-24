@@ -11,7 +11,7 @@ import com.culture.estet.ui.theme.MusicBg
 import com.culture.estet.ui.theme.PaintingBg
 import com.culture.estet.ui.theme.TheatreBg
 
-enum class TasksArtType {
+enum class TaskArtType {
     MUSIC,
     DANCE,
     THEATRE,
@@ -48,16 +48,16 @@ enum class TasksArtType {
 }
 
 
-class NavTasksArtType: NavType<TasksArtType>(isNullableAllowed = false) {
-    override fun get(bundle: Bundle, key: String): TasksArtType {
-        return bundle.getSerializable(key) as TasksArtType
+class NavTasksArtType: NavType<TaskArtType>(isNullableAllowed = false) {
+    override fun get(bundle: Bundle, key: String): TaskArtType {
+        return bundle.getSerializable(key) as TaskArtType
     }
 
-    override fun parseValue(value: String): TasksArtType {
-        return TasksArtType.valueOf(value)
+    override fun parseValue(value: String): TaskArtType {
+        return TaskArtType.valueOf(value)
     }
 
-    override fun put(bundle: Bundle, key: String, value: TasksArtType) {
+    override fun put(bundle: Bundle, key: String, value: TaskArtType) {
         bundle.putSerializable(key, value)
     }
 }

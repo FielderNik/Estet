@@ -14,8 +14,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.culture.estet.R
-import com.culture.estet.domain.models.tasks.TasksArtType
-import com.culture.estet.domain.models.tasks.TasksLevelType
+import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.tasks.TaskLevelType
 import com.culture.estet.ui.presentation.elements.dialogs.ConfirmExitDialog
 import com.culture.estet.ui.presentation.elements.dialogs.DialogButton
 import com.culture.estet.ui.presentation.localcomposition.LocalAppScreenState
@@ -28,8 +28,8 @@ import com.culture.estet.ui.presentation.tasks.questions.model.StepType
 @Composable
 fun QuestionsScreen(
     userId: String,
-    artType: TasksArtType,
-    levelType: TasksLevelType,
+    artType: TaskArtType,
+    levelType: TaskLevelType,
     viewModel: QuestionsViewModel = hiltViewModel()
 ) {
 

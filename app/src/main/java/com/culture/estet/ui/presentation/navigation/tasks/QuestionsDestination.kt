@@ -8,8 +8,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.culture.estet.domain.models.tasks.NavTasksArtType
 import com.culture.estet.domain.models.tasks.NavTasksLevelType
-import com.culture.estet.domain.models.tasks.TasksArtType
-import com.culture.estet.domain.models.tasks.TasksLevelType
+import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.tasks.TaskLevelType
 import com.culture.estet.ui.presentation.navigation.AppNavigationDestination
 import com.culture.estet.ui.presentation.tasks.questions.QuestionsScreen
 
@@ -21,7 +21,7 @@ object QuestionsDestination : AppNavigationDestination {
 
     override val destination: String = "questions_destination"
 
-    fun navigationRoute(userId: String, artType: TasksArtType, levelType: TasksLevelType): String {
+    fun navigationRoute(userId: String, artType: TaskArtType, levelType: TaskLevelType): String {
         val encodedUserId = Uri.encode(userId)
         return "questions_route?$USER_ID_ARG=$encodedUserId&$ART_TYPE_ARG=${artType.name}&$LEVEL_TYPE_ARG=${levelType.name}"
     }
@@ -31,12 +31,12 @@ object QuestionsDestination : AppNavigationDestination {
         return Uri.decode(encodedId)
     }
 
-    fun artType(entry: NavBackStackEntry): TasksArtType {
-        return entry.arguments?.getSerializable(ART_TYPE_ARG) as TasksArtType
+    fun artType(entry: NavBackStackEntry): TaskArtType {
+        return entry.arguments?.getSerializable(ART_TYPE_ARG) as TaskArtType
     }
 
-    fun levelType(entry: NavBackStackEntry): TasksLevelType {
-        return entry.arguments?.getSerializable(LEVEL_TYPE_ARG) as TasksLevelType
+    fun levelType(entry: NavBackStackEntry): TaskLevelType {
+        return entry.arguments?.getSerializable(LEVEL_TYPE_ARG) as TaskLevelType
     }
 }
 

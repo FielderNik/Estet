@@ -4,8 +4,8 @@ import com.culture.estet.core.funcional.onFailure
 import com.culture.estet.core.funcional.onSuccess
 import com.culture.estet.domain.models.questions.Answer
 import com.culture.estet.domain.models.questions.Question
-import com.culture.estet.domain.models.tasks.TasksArtType
-import com.culture.estet.domain.models.tasks.TasksLevelType
+import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.tasks.TaskLevelType
 import com.culture.estet.domain.repository.QuestionRepository
 import com.culture.estet.ui.presentation.base.BaseViewModel
 import com.culture.estet.ui.presentation.tasks.questions.model.Statistics
@@ -91,7 +91,7 @@ class QuestionsViewModel @Inject constructor(
         steps.emit(step)
     }
 
-    private suspend fun loadQuestions(userId: String, artType: TasksArtType, levelType: TasksLevelType) {
+    private suspend fun loadQuestions(userId: String, artType: TaskArtType, levelType: TaskLevelType) {
         withIo {
             questionRepository.getQuestionsByParameters(userId = userId, artType = artType, levelType = levelType)
         }
