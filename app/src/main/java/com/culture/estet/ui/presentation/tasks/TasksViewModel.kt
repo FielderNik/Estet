@@ -1,17 +1,20 @@
 package com.culture.estet.ui.presentation.tasks
 
+import com.culture.estet.core.funcional.onFailure
+import com.culture.estet.core.funcional.onSuccess
 import com.culture.estet.domain.models.tasks.Task
-import com.culture.estet.domain.models.tasks.TasksArtType
-import com.culture.estet.domain.models.tasks.TasksLevelType
+import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.tasks.TaskLevelType
 import com.culture.estet.domain.models.tasks.generateId
+import com.culture.estet.domain.repository.TaskRepository
 import com.culture.estet.ui.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class TasksViewModel @Inject constructor(
-
-) : BaseViewModel<TasksScreenState, TasksEffect, TasksAction>(TasksScreenState.TasksInProgress()) {
+    private val taskRepository: TaskRepository,
+) : BaseViewModel<TasksScreenState, TasksEffect, TasksAction>(TasksScreenState.Loading) {
 
     override fun sendAction(action: TasksAction) {
         launchOnMain {
@@ -21,8 +24,8 @@ class TasksViewModel @Inject constructor(
 
     private suspend fun handleAction(currentState: TasksScreenState, action: TasksAction) {
         when(currentState) {
-            is TasksScreenState.HasNotTasks -> {
-                handleActionNotTasksState(currentState, action)
+            is TasksScreenState.Loading -> {
+                handleActionLoadingState(currentState, action)
             }
             is TasksScreenState.TasksInProgress -> {
                 handleActionTasksInProgressState(currentState, action)
@@ -33,20 +36,34 @@ class TasksViewModel @Inject constructor(
     private suspend fun handleActionTasksInProgressState(currentState: TasksScreenState.TasksInProgress, action: TasksAction) {
         when(action) {
             TasksAction.Initialize -> {
-                val user = getCurrentUser()
-                val updatedState = currentState.copy(userId = user, tasks = list)
-                setState(updatedState)
+                loadTasks()
+//                val user = getCurrentUser()
+//                val updatedState = currentState.copy(userId = user, tasks = list)
+//                setState(updatedState)
             }
         }
     }
 
-    private suspend fun handleActionNotTasksState(currentState: TasksScreenState.HasNotTasks, action: TasksAction) {
+    private suspend fun handleActionLoadingState(currentState: TasksScreenState.Loading, action: TasksAction) {
         when(action) {
             TasksAction.Initialize -> {
-                val user = getCurrentUser()
-                setUserForNotFilledState(currentState = currentState, userId = user)
+                loadTasks()
             }
         }
+    }
+
+    private suspend fun loadTasks() {
+        val user = getCurrentUser()
+        withIo {
+            taskRepository.getTaskCategoriesByUserId(user)
+        }
+            .onFailure {
+                //todo
+            }
+            .onSuccess { taskCategories ->
+                val sortedTaskCategories = taskCategories.sortedBy { it.ordinal }
+                setState(TasksScreenState.TasksInProgress(userId = user, tasks = sortedTaskCategories))
+            }
     }
 
 
@@ -54,86 +71,77 @@ class TasksViewModel @Inject constructor(
         return "user_id_1"
     }
 
-    private suspend fun setUserForNotFilledState(currentState: TasksScreenState.HasNotTasks, userId: String) {
-        val updatedState = currentState.copy(userId = userId)
-        setState(updatedState)
-    }
-
-    private suspend fun setUserForTaskInProgressState(currentState: TasksScreenState.HasNotTasks, userId: String) {
-        val updatedState = currentState.copy(userId = userId)
-        setState(updatedState)
-    }
 }
 
 
 val list = listOf(
         Task(
             id = generateId(),
-            type = TasksArtType.MUSIC,
-            level = TasksLevelType.BEGINNER,
+            type = TaskArtType.MUSIC,
+            level = TaskLevelType.BEGINNER,
             questionsCount = 6,
             answerCount = 4,
         ),
         Task(
             id = generateId(),
-            type = TasksArtType.THEATRE,
-            level = TasksLevelType.BEGINNER,
+            type = TaskArtType.THEATRE,
+            level = TaskLevelType.BEGINNER,
             questionsCount = 6,
             answerCount = 4,
         ),
         Task(
             id = generateId(),
-            type = TasksArtType.DANCE,
-            level = TasksLevelType.BEGINNER,
+            type = TaskArtType.DANCE,
+            level = TaskLevelType.BEGINNER,
             questionsCount = 6,
             answerCount = 4,
         ),
         Task(
             id = generateId(),
-            type = TasksArtType.THEATRE,
-            level = TasksLevelType.EXPERT,
+            type = TaskArtType.THEATRE,
+            level = TaskLevelType.EXPERT,
             questionsCount = 6,
             answerCount = 1,
         ),
         Task(
             id = generateId(),
-            type = TasksArtType.MUSIC,
-            level = TasksLevelType.ADVANCED,
+            type = TaskArtType.MUSIC,
+            level = TaskLevelType.ADVANCED,
             questionsCount = 6,
             answerCount = 6,
         ),
         Task(
             id = generateId(),
-            type = TasksArtType.DANCE,
-            level = TasksLevelType.EXPERT,
+            type = TaskArtType.DANCE,
+            level = TaskLevelType.EXPERT,
             questionsCount = 6,
             answerCount = 4,
         ),
         Task(
             id = generateId(),
-            type = TasksArtType.MUSIC,
-            level = TasksLevelType.BEGINNER,
+            type = TaskArtType.MUSIC,
+            level = TaskLevelType.BEGINNER,
             questionsCount = 6,
             answerCount = 4,
         ),
         Task(
             id = generateId(),
-            type = TasksArtType.THEATRE,
-            level = TasksLevelType.BEGINNER,
+            type = TaskArtType.THEATRE,
+            level = TaskLevelType.BEGINNER,
             questionsCount = 6,
             answerCount = 4,
         ),
         Task(
             id = generateId(),
-            type = TasksArtType.DANCE,
-            level = TasksLevelType.BEGINNER,
+            type = TaskArtType.DANCE,
+            level = TaskLevelType.BEGINNER,
             questionsCount = 6,
             answerCount = 4,
         ),
         Task(
             id = generateId(),
-            type = TasksArtType.THEATRE,
-            level = TasksLevelType.EXPERT,
+            type = TaskArtType.THEATRE,
+            level = TaskLevelType.EXPERT,
             questionsCount = 6,
             answerCount = 1,
         ),

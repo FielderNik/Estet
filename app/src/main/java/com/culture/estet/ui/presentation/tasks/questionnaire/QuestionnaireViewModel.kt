@@ -1,8 +1,8 @@
 package com.culture.estet.ui.presentation.tasks.questionnaire
 
-import com.culture.estet.domain.models.tasks.TasksArtType
-import com.culture.estet.domain.models.tasks.TasksGoalType
-import com.culture.estet.domain.models.tasks.TasksLevelType
+import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.tasks.TaskGoalType
+import com.culture.estet.domain.models.tasks.TaskLevelType
 import com.culture.estet.ui.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -51,13 +51,13 @@ class QuestionnaireViewModel @Inject constructor(
         }
     }
 
-    private suspend fun updateLevelType(currentState: QuestionnaireScreenState, levelType: TasksLevelType) {
+    private suspend fun updateLevelType(currentState: QuestionnaireScreenState, levelType: TaskLevelType) {
         val updatedState = currentState.copy(level = levelType)
         checkCanStart(updatedState)
 
     }
 
-    private suspend fun updateSelectedGoals(currentState: QuestionnaireScreenState, goalType: TasksGoalType) {
+    private suspend fun updateSelectedGoals(currentState: QuestionnaireScreenState, goalType: TaskGoalType) {
         val currentGoals = currentState.goals.toMutableSet()
         if (currentGoals.contains(goalType)) {
             currentGoals.remove(goalType)
@@ -68,7 +68,7 @@ class QuestionnaireViewModel @Inject constructor(
         checkCanStart(updatedState)
     }
 
-    private suspend fun updateSelectedArts(currentState: QuestionnaireScreenState, artType: TasksArtType) {
+    private suspend fun updateSelectedArts(currentState: QuestionnaireScreenState, artType: TaskArtType) {
         val updatedState = currentState.copy(art = artType)
         checkCanStart(updatedState)
     }
