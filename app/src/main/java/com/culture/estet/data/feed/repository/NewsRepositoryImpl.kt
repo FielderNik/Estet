@@ -2,9 +2,9 @@ package com.culture.estet.data.feed.repository
 
 import com.culture.estet.data.feed.News
 import com.culture.estet.data.feed.local.NewsDao
+import com.culture.estet.data.feed.local.toNewsList
 import com.culture.estet.data.feed.remote.NewsRemoteDataSource
 import com.culture.estet.data.feed.remote.NewsResponse
-import com.culture.estet.data.feed.toNewsList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

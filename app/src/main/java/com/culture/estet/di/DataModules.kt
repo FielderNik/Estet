@@ -17,20 +17,10 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class RepositoryModule {
-
-    @Singleton
+interface DataSourceModule {
     @Binds
-    abstract fun bindNewsRepository(repository: NewsRepositoryImpl): NewsRepository
-}
-
-@Module
-@InstallIn(SingletonComponent::class)
-abstract class DataSourceModule {
-
     @Singleton
-    @Binds
-    abstract fun bindNetworkDataSource(dataSource: RetrofitRemoteDataSource): NewsRemoteDataSource
+    fun bindNetworkDataSource(dataSource: RetrofitRemoteDataSource): NewsRemoteDataSource
 }
 
 @Module
