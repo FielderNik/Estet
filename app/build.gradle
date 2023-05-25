@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'kotlin-android'
     id 'dagger.hilt.android.plugin'
 }
 
@@ -98,4 +99,17 @@ dependencies {
 
     // MapKit
     implementation 'com.yandex.android:maps.mobile:4.3.1-lite'
+
+    //Room
+    implementation "androidx.room:room-ktx:2.5.1"
+    implementation "androidx.room:room-runtime:2.5.1"
+    kapt "androidx.room:room-compiler:2.5.1"
+
+
+    //Retrofit + Gson
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.2'
+
+    //Logger for retrofit
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
 }

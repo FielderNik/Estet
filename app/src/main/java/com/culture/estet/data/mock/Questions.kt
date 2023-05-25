@@ -1,9 +1,9 @@
 package com.culture.estet.data.mock
 
+import com.culture.estet.core.generateId
 import com.culture.estet.domain.models.questions.Answer
 import com.culture.estet.domain.models.questions.Question
 import com.culture.estet.domain.models.questions.QuestionType
-import com.culture.estet.domain.models.tasks.generateId
 
 object Questions {
     private val answer11 = Answer(

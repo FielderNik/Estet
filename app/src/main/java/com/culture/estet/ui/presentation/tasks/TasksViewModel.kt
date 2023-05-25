@@ -3,9 +3,9 @@ package com.culture.estet.ui.presentation.tasks
 import com.culture.estet.core.funcional.onFailure
 import com.culture.estet.core.funcional.onSuccess
 import com.culture.estet.domain.models.tasks.Task
+import com.culture.estet.core.generateId
 import com.culture.estet.domain.models.tasks.TaskArtType
 import com.culture.estet.domain.models.tasks.TaskLevelType
-import com.culture.estet.domain.models.tasks.generateId
 import com.culture.estet.domain.repository.TaskRepository
 import com.culture.estet.ui.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
