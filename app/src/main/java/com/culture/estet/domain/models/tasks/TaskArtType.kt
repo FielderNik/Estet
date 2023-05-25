@@ -1,15 +1,17 @@
 package com.culture.estet.domain.models.tasks
 
+import android.os.Bundle
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavType
 import com.culture.estet.R
 import com.culture.estet.ui.theme.DanceBg
 import com.culture.estet.ui.theme.MusicBg
 import com.culture.estet.ui.theme.PaintingBg
 import com.culture.estet.ui.theme.TheatreBg
 
-enum class TasksArtType {
+enum class TaskArtType {
     MUSIC,
     DANCE,
     THEATRE,
@@ -42,5 +44,20 @@ enum class TasksArtType {
             THEATRE -> TheatreBg
             PAINTING -> PaintingBg
         }
+    }
+}
+
+
+class NavTasksArtType: NavType<TaskArtType>(isNullableAllowed = false) {
+    override fun get(bundle: Bundle, key: String): TaskArtType {
+        return bundle.getSerializable(key) as TaskArtType
+    }
+
+    override fun parseValue(value: String): TaskArtType {
+        return TaskArtType.valueOf(value)
+    }
+
+    override fun put(bundle: Bundle, key: String, value: TaskArtType) {
+        bundle.putSerializable(key, value)
     }
 }

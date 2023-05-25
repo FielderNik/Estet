@@ -7,9 +7,7 @@ import androidx.navigation.compose.NavHost
 import com.culture.estet.ui.presentation.navigation.courses.createCoursesGraph
 import com.culture.estet.ui.presentation.navigation.feed.createFeedGraph
 import com.culture.estet.ui.presentation.navigation.map.createMapGraph
-import com.culture.estet.ui.presentation.navigation.tasks.TasksDestination
-import com.culture.estet.ui.presentation.navigation.tasks.createQuestionnaireGraph
-import com.culture.estet.ui.presentation.navigation.tasks.createTasksGraph
+import com.culture.estet.ui.presentation.navigation.tasks.*
 import com.culture.estet.ui.presentation.navigation.tournament.createTournamentGraph
 
 @Composable
@@ -31,6 +29,8 @@ fun AppNavHost(
         createFeedGraph()
 
         createQuestionnaireGraph()
+        createQuestionsGraph()
+        createTaskLevelGraph()
 
     }
 }

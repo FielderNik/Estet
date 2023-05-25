@@ -1,23 +1,25 @@
 package com.culture.estet.ui.presentation.tasks.questionnaire
 
-import com.culture.estet.domain.models.tasks.TasksArtType
-import com.culture.estet.domain.models.tasks.TasksGoalType
-import com.culture.estet.domain.models.tasks.TasksLevelType
+import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.tasks.TaskGoalType
+import com.culture.estet.domain.models.tasks.TaskLevelType
 
 data class QuestionnaireScreenState(
-    val art: TasksArtType? = null,
-    val level: TasksLevelType? = null,
-    val goals: Set<TasksGoalType> = mutableSetOf(),
+    val userId: String? = null,
+    val art: TaskArtType? = null,
+    val level: TaskLevelType? = null,
+    val goals: Set<TaskGoalType> = mutableSetOf(),
     val canStartTask: Boolean = false,
 )
 
 sealed class QuestionnaireEffect {
-
+    data class StartTask(val userId: String, val artType: TaskArtType, val levelType: TaskLevelType) : QuestionnaireEffect()
 }
 
 sealed class QuestionnaireAction {
-    data class SelectArtType(val artType: TasksArtType) : QuestionnaireAction()
-    data class SelectLevelType(val levelType: TasksLevelType) : QuestionnaireAction()
-    data class SelectGoalType(val goalType: TasksGoalType) : QuestionnaireAction()
-
+    data class Initialize(val userId: String) : QuestionnaireAction()
+    data class SelectArtType(val artType: TaskArtType) : QuestionnaireAction()
+    data class SelectLevelType(val levelType: TaskLevelType) : QuestionnaireAction()
+    data class SelectGoalType(val goalType: TaskGoalType) : QuestionnaireAction()
+    object CheckParametersAndStartTask : QuestionnaireAction()
 }
