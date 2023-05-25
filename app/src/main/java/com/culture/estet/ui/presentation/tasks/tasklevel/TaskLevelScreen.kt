@@ -31,12 +31,15 @@ fun TaskLevelScreen(
     artType: TaskArtType,
     viewModel: TaskLevelViewModel = hiltViewModel()
 ) {
-
-
+    val appScreenState = LocalAppScreenState.current
     val state = viewModel.state.collectAsState()
 
     LaunchedEffect(Unit) {
         viewModel.sendAction(TaskLevelAction.Initialize(userId = userId, artType = artType))
+    }
+
+    LaunchedEffect(Unit) {
+        appScreenState.shouldShowBottomBar.value = false
     }
 
     TaskLevelContent(userId = userId, state = state.value, sendAction = viewModel::sendAction)
@@ -67,7 +70,9 @@ private fun Levels(
 ) {
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         levels.forEach { level ->
