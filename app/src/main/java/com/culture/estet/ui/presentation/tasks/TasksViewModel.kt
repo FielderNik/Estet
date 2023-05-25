@@ -3,7 +3,7 @@ package com.culture.estet.ui.presentation.tasks
 import com.culture.estet.domain.models.tasks.Task
 import com.culture.estet.domain.models.tasks.TasksArtType
 import com.culture.estet.domain.models.tasks.TasksLevelType
-import com.culture.estet.domain.models.tasks.generateId
+import com.culture.estet.core.generateId
 import com.culture.estet.ui.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
