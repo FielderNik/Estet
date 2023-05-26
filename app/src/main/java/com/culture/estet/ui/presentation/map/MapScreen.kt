@@ -1,9 +1,14 @@
 package com.culture.estet.ui.presentation.map
 
+import android.util.Log
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,6 +22,7 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -34,6 +40,7 @@ import com.yandex.mapkit.mapview.MapView
 fun MapScreen(
     viewModel: MapViewModel = hiltViewModel()
 ) {
+    Log.v("~", "Create")
     val state = viewModel.state.collectAsState()
     MapScreenContent(state.value, viewModel::sendAction)
 }
@@ -44,16 +51,6 @@ private fun MapScreenContent(
     sendAction: (MapAction) -> Unit
 ) {
 
-
-    when (state) {
-        is MapScreenState.Available -> MapAvailableScreen()
-
-        is MapScreenState.Unavailable -> MapUnavailableScreen()
-    }
-}
-
-@Composable
-private fun MapAvailableScreen() {
     val lifecycleOwner = LocalLifecycleOwner.current
     var mapView: MapView? = null
 
@@ -76,18 +73,46 @@ private fun MapAvailableScreen() {
         }
     }
 
-    AndroidView(
-        modifier = Modifier.fillMaxSize(),
-        factory = { context -> MapView(context).apply { mapView = this } },
-        update = { view ->
-            view.map.move(
-                CameraPosition(Point(55.7524,  37.610778), 10.0f, 0.0f, 0.0f),
-                Animation(Animation.Type.SMOOTH, 0f),
-                null
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+
+        Log.v("~","Box1")
+
+        Box(
+            modifier = Modifier
+                .height(Dp(24f))
+                .width(IntrinsicSize.Max)
+                .background(Color.Red),
+        )
+/*        AnimatedVisibility(
+            visible = true,
+            modifier = Modifier.align(Alignment.TopCenter)
+        ) {
+            Box(
+                modifier = Modifier
+                    .height(Dp(24f))
+                    .width(IntrinsicSize.Max)
+                    .background(Color.Red),
             )
-            view.setViewTreeLifecycleOwner(lifecycleOwner)
-        }
-    )
+        }*/
+
+/*        AndroidView(
+            modifier = Modifier.fillMaxSize(),
+            factory = { context -> MapView(context).apply { mapView = this } },
+            update = { view ->
+                view.map.move(
+                    CameraPosition(Point(55.7524, 37.610778), 10.0f, 0.0f, 0.0f),
+                    Animation(Animation.Type.SMOOTH, 0f),
+                    null
+                )
+                view.setViewTreeLifecycleOwner(lifecycleOwner)
+            }
+        )*/
+    }
+}
+
+@Composable
+private fun MapAvailableScreen() {
+
 }
 
 @Composable

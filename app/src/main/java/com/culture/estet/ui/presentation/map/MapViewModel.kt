@@ -1,5 +1,9 @@
 package com.culture.estet.ui.presentation.map
 
+import android.util.Log
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.viewModelScope
 import com.culture.estet.core.network.connection.ConnectivityObserver
 import com.culture.estet.ui.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,16 +16,17 @@ class MapViewModel @Inject constructor(
 
     init {
         launchOnMain {
+            handleNetworkStatus(connectivityObserver.currentConnection())
             connectivityObserver.observe().collect(this::handleNetworkStatus)
         }
     }
 
     override fun sendAction(action: MapAction) {
-        launchOnMain {
+/*        launchOnMain {
             handleAction(state.value, action)
-        }
+        }*/
     }
-
+/*
     private suspend fun handleAction(currentState: MapScreenState, action: MapAction) {
         when(currentState) {
             is MapScreenState.Loading -> {
@@ -43,12 +48,14 @@ class MapViewModel @Inject constructor(
         when(action) {
 
         }
-    }
+    }*/
 
     private suspend fun handleNetworkStatus(status: ConnectivityObserver.Status) {
+        Log.v("~", status.name)
         when(status) {
             ConnectivityObserver.Status.AVAILABLE -> setState(MapScreenState.Available)
             ConnectivityObserver.Status.UNAVAILABLE -> setState(MapScreenState.Unavailable)
+            ConnectivityObserver.Status.LOST -> setState(MapScreenState.Unavailable)
             else -> Unit
         }
     }
