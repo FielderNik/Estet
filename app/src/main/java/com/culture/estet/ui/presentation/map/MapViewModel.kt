@@ -16,7 +16,7 @@ class MapViewModel @Inject constructor(
 
     init {
         launchOnMain {
-            handleNetworkStatus(connectivityObserver.currentConnection())
+//            handleNetworkStatus(connectivityObserver.currentConnection())
             connectivityObserver.observe().collect(this::handleNetworkStatus)
         }
     }

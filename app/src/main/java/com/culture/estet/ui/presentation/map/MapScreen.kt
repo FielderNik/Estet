@@ -3,12 +3,7 @@ package com.culture.estet.ui.presentation.map
 import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -75,27 +71,7 @@ private fun MapScreenContent(
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
 
-        Log.v("~","Box1")
-
-        Box(
-            modifier = Modifier
-                .height(Dp(24f))
-                .width(IntrinsicSize.Max)
-                .background(Color.Red),
-        )
-/*        AnimatedVisibility(
-            visible = true,
-            modifier = Modifier.align(Alignment.TopCenter)
-        ) {
-            Box(
-                modifier = Modifier
-                    .height(Dp(24f))
-                    .width(IntrinsicSize.Max)
-                    .background(Color.Red),
-            )
-        }*/
-
-/*        AndroidView(
+        AndroidView(
             modifier = Modifier.fillMaxSize(),
             factory = { context -> MapView(context).apply { mapView = this } },
             update = { view ->
@@ -106,7 +82,25 @@ private fun MapScreenContent(
                 )
                 view.setViewTreeLifecycleOwner(lifecycleOwner)
             }
-        )*/
+        )
+
+        AnimatedVisibility(
+            visible = state is MapScreenState.Unavailable,
+            modifier = Modifier.align(Alignment.TopCenter)
+        ) {
+            Box(
+                modifier = Modifier
+
+                    .width(IntrinsicSize.Max)
+                    .background(Color.Red)
+                    .padding(vertical = 2.dp, horizontal = 8.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(text = "нет инета", color =  Color.White)
+            }
+
+        }
+
     }
 }
 
