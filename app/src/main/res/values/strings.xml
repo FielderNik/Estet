@@ -29,6 +29,7 @@
     <string name="title_you_have_not_score">У тебя еще нет баллов в этой категории.</string>
     <string name="title_task_completed">%1$s из %2$s пройдено</string>
     <string name="title_level_tasks">%1$s задания</string>
+    <string name="title_correct_answer">Правильный ответ</string>
 
 
     <string name="dialog_close_task_title">Закрыть задание</string>
