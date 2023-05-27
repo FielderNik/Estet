@@ -10,6 +10,7 @@ class AppTopBarState(
 ) {
     var title: String by mutableStateOf("")
     var isShowBackNavigate by mutableStateOf(false)
+    var isShowProfile by mutableStateOf(true)
     var isShowTopBar: Boolean by mutableStateOf(false)
 
 

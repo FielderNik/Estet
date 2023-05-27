@@ -20,6 +20,7 @@ import com.culture.estet.ui.theme.LightPastelPurple
 fun AppTopBar(
     title: String,
     isShowNavigateBack: Boolean,
+    isShowProfile: Boolean,
 ) {
     val appState = LocalAppScreenState.current
 
@@ -56,16 +57,19 @@ fun AppTopBar(
             .fillMaxHeight()
             .widthIn(36.dp), contentAlignment = Alignment.Center
         ) {
-            IconButton(
-                onClick = {
-                    appState.navController.navigate(ProfileDestination.navigationRoute())
+            if (isShowProfile) {
+
+                IconButton(
+                    onClick = {
+                        appState.navController.navigate(ProfileDestination.navigationRoute())
+                    }
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.icon_profile),
+                        contentDescription = null,
+                        tint = Color.White
+                    )
                 }
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.icon_profile),
-                    contentDescription = null,
-                    tint = Color.White
-                )
             }
         }
 

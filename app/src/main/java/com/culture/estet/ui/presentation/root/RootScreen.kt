@@ -50,6 +50,8 @@ fun RootScreen(
             if (navBackStackEntry.destination.route in TopLevelDestination.values().map { it.route }) {
                 appScreenState.shouldShowBottomBar.value = true
                 appTopBarState.isShowTopBar = true
+                appTopBarState.isShowProfile = true
+                appTopBarState.isShowBackNavigate = false
             }
         }
     }
@@ -79,7 +81,8 @@ fun RootScreen(
                 if (appTopBarState.isShowTopBar) {
                     AppTopBar(
                         title = appTopBarState.title,
-                        isShowNavigateBack = appTopBarState.isShowBackNavigate
+                        isShowNavigateBack = appTopBarState.isShowBackNavigate,
+                        isShowProfile = appTopBarState.isShowProfile
                     )
                 }
             },
