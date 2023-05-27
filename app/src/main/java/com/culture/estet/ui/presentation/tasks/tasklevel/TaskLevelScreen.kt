@@ -109,8 +109,9 @@ private fun LevelItem(
         ) {
             Image(
                 modifier = Modifier.size(160.dp),
-                painter = painterResource(id = level.taskLevelType.circleSource()),
-                contentDescription = null
+                painter = painterResource(id = level.taskLevelType.circleSourceByArtType(artType = level.taskArtType)),
+                contentDescription = null,
+
             )
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(

@@ -43,8 +43,20 @@ class QuestionsViewModel @Inject constructor(
                 QuestionsAction.NextQuestion -> {
                     nextQuestion()
                 }
+                QuestionsAction.SaveResultsAndExit -> {
+                    saveResult()
+                    exitQuestions()
+                }
             }
         }
+    }
+
+    private suspend fun exitQuestions() {
+        sendEffect(QuestionsEffects.ExitQuestions)
+    }
+
+    private suspend fun saveResult() {
+       //todo
     }
 
     private fun fillStatistics() {

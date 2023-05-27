@@ -30,11 +30,41 @@ enum class TaskLevelType {
     }
 
     @DrawableRes
-    fun circleSource(): Int {
+    fun circleSourceByArtType(artType: TaskArtType): Int {
         return when(this) {
-            BEGINNER -> R.drawable.image_pink_circle
-            ADVANCED -> R.drawable.image_violet_circle
-            EXPERT -> R.drawable.image_dark_violet
+            BEGINNER -> beginnerCircleSource(artType)
+            ADVANCED -> advancedCircleSource(artType)
+            EXPERT -> expertCircleSource(artType)
+        }
+    }
+
+    @DrawableRes
+    private fun beginnerCircleSource(artType: TaskArtType): Int {
+        return when(artType) {
+            TaskArtType.MUSIC -> R.drawable.image_green_light_circle
+            TaskArtType.DANCE -> R.drawable.image_green_light_variant
+            TaskArtType.THEATRE -> R.drawable.image_pink_circle
+            TaskArtType.PAINTING -> R.drawable.image_pink_circle
+        }
+    }
+
+    @DrawableRes
+    private fun advancedCircleSource(artType: TaskArtType): Int {
+        return when(artType) {
+            TaskArtType.MUSIC -> R.drawable.image_green_medium_circle
+            TaskArtType.DANCE -> R.drawable.image_green_circle
+            TaskArtType.THEATRE -> R.drawable.image_violet_circle
+            TaskArtType.PAINTING -> R.drawable.image_pink_dark_circle
+        }
+    }
+
+    @DrawableRes
+    private fun expertCircleSource(artType: TaskArtType): Int {
+        return when(artType) {
+            TaskArtType.MUSIC -> R.drawable.image_green_variant_circle
+            TaskArtType.DANCE -> R.drawable.image_blue_dark_circle
+            TaskArtType.THEATRE -> R.drawable.image_violet_dark
+            TaskArtType.PAINTING -> R.drawable.image_violet_dark
         }
     }
 }

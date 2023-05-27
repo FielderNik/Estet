@@ -14,14 +14,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.flowWithLifecycle
+import androidx.navigation.NavHostController
 import com.culture.estet.R
+import com.culture.estet.core.utils.scoreText
 import com.culture.estet.domain.models.questions.Answer
 import com.culture.estet.domain.models.questions.Question
 import com.culture.estet.domain.models.tasks.TaskArtType
@@ -32,10 +39,12 @@ import com.culture.estet.ui.presentation.elements.dialogs.DialogButton
 import com.culture.estet.ui.presentation.localcomposition.LocalAppScreenState
 import com.culture.estet.ui.presentation.localcomposition.LocalBottomSheetEventBus
 import com.culture.estet.ui.presentation.localcomposition.LocalDialogEventBus
+import com.culture.estet.ui.presentation.navigation.tasks.TasksDestination
 import com.culture.estet.ui.presentation.navigation.tasks.navigateToTasks
 import com.culture.estet.ui.presentation.tasks.questions.model.Statistics
 import com.culture.estet.ui.presentation.tasks.questions.model.Step
 import com.culture.estet.ui.presentation.tasks.questions.model.StepType
+import com.culture.estet.ui.theme.LightPastelPurple
 
 @Composable
 fun QuestionsScreen(
@@ -44,7 +53,8 @@ fun QuestionsScreen(
     levelType: TaskLevelType,
     viewModel: QuestionsViewModel = hiltViewModel()
 ) {
-
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
+    val navigator = LocalAppScreenState.current.navController
     val step = viewModel.steps.collectAsState(initial = null)
 
     LaunchedEffect(Unit) {
@@ -55,6 +65,15 @@ fun QuestionsScreen(
                 levelType = levelType
             )
         )
+    }
+
+    LaunchedEffect(Unit) {
+        viewModel.effect.flowWithLifecycle(lifecycle).collect {
+            handleEffects(
+                effect = it,
+                navigator = navigator
+            )
+        }
     }
 
 
@@ -97,7 +116,6 @@ private fun StepData(
             .fillMaxSize()
             .verticalScroll(scrollState)
             .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
         HeaderBlock(statistics = step.statistics, sendAction = sendAction)
         if (step.stepType != StepType.FINAL) {
@@ -128,6 +146,7 @@ private fun StepData(
 
             StepType.FINAL -> {
                 FinalScreen(
+                    artType = artType,
                     step = step,
                     sendAction = sendAction
                 )
@@ -142,7 +161,7 @@ private fun ColumnScope.QuestionStep(
     sendAction: (QuestionsAction) -> Unit,
 ) {
 
-    step.question.answers.forEach { answer ->
+    step.question.answers.forEachIndexed { index, answer ->  
         AnswerBlock(
             isAnswerStep = step.stepType in arrayOf(StepType.ERROR_ANSWER, StepType.CORRECT_ANSWER),
             answer = answer,
@@ -150,6 +169,10 @@ private fun ColumnScope.QuestionStep(
             sendAction = sendAction,
             selectedAnswer = step.selectedAnswer
         )
+        if (index < step.question.answers.size - 1) {
+            Spacer(modifier = Modifier.height(24.dp))
+        }
+        
     }
 }
 
@@ -252,7 +275,15 @@ private fun HeaderBlock(
                 }
             }
         ) {
-            Icon(painter = painterResource(id = R.drawable.icon_close), contentDescription = null, tint = Color.Black)
+            Box(
+                modifier = Modifier
+                    .size(32.dp)
+                    .clip(CircleShape)
+                    .border(width = 1.dp, color = Color.Green, shape = CircleShape),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(painter = painterResource(id = R.drawable.icon_info), contentDescription = null, tint = Color.Black)
+            }
         }
     }
 }
@@ -263,7 +294,7 @@ private fun ColumnScope.CorrectAnswerStep(
     step: Step,
     sendAction: (QuestionsAction) -> Unit,
 ) {
-    step.question.answers.forEach { answer ->
+    step.question.answers.forEachIndexed { index, answer ->
         AnswerBlock(
             isAnswerStep = step.stepType in arrayOf(StepType.ERROR_ANSWER, StepType.CORRECT_ANSWER),
             answer = answer,
@@ -271,8 +302,11 @@ private fun ColumnScope.CorrectAnswerStep(
             sendAction = sendAction,
             selectedAnswer = step.selectedAnswer
         )
+        if (index < step.question.answers.size - 1) {
+            Spacer(modifier = Modifier.height(24.dp))
+        }
     }
-
+    Spacer(modifier = Modifier.height(24.dp))
     AnswerBottomBlock(
         step = step,
         isCorrect = true,
@@ -320,11 +354,12 @@ private fun AnswerBottomBlock(
                     isShowAnswer = !isShowAnswer
                 }
                 .padding(8.dp),
-            horizontalArrangement = Arrangement.spacedBy(4.dp)
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Box(
                 modifier = Modifier
-                    .size(24.dp)
+                    .size(32.dp)
                     .clip(CircleShape)
                     .background(Color.Green), contentAlignment = Alignment.Center
             ) {
@@ -334,7 +369,7 @@ private fun AnswerBottomBlock(
                     contentDescription = null
                 )
             }
-            Text(text = "Верный ответ")
+            Text(text = stringResource(id = R.string.title_right_answer))
         }
 
         TextButton(
@@ -343,23 +378,52 @@ private fun AnswerBottomBlock(
                 sendAction(QuestionsAction.NextQuestion)
             }
         ) {
-            Text(text = "Дальше")
+            Text(text = stringResource(id = R.string.action_next))
         }
     }
 }
 
 @Composable
 private fun ColumnScope.FinalScreen(
+    artType: TaskArtType,
     step: Step,
     sendAction: (QuestionsAction) -> Unit,
 ) {
-    Text(text = "Поздравляю, вы ответили на все вопросы!")
-    Button(
-        onClick = {
+    
+    val scoreAnnotatedString = buildAnnotatedString {
+        withStyle(style = SpanStyle(fontSize = 24.sp)) {
+            append(stringResource(id = R.string.title_you_collect_some_score))
+        }
 
+        withStyle(style = SpanStyle(fontSize = 120.sp, color = LightPastelPurple, fontWeight = FontWeight.Black, )) {
+            append("${step.statistics.currentQuestionCount}")
+        }
+
+        withStyle(style = SpanStyle(fontSize = 24.sp)) {
+            append(stringResource(id = scoreText(step.statistics.currentQuestionCount)))
+        }
+    }
+    Text(text = stringResource(id = R.string.title_congratulation), fontSize = 32.sp, lineHeight = 36.sp)
+    Text(text = stringResource(id = R.string.title_task_finished), fontSize = 32.sp, lineHeight = 36.sp)
+
+
+    Text(text = scoreAnnotatedString)
+
+    ArtImage(
+        modifier = Modifier.offset(x = (-72).dp),
+        size = 240.dp,
+        artType = artType
+    )
+    Spacer(modifier = Modifier.weight(1f))
+    Button(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(56.dp),
+        onClick = {
+            sendAction(QuestionsAction.SaveResultsAndExit)
         }
     ) {
-        Text(text = "Завершить")
+        Text(text = stringResource(id = R.string.action_finish))
     }
 }
 
@@ -369,7 +433,7 @@ private fun ColumnScope.IncorrectAnswerStep(
     step: Step,
     sendAction: (QuestionsAction) -> Unit,
 ) {
-    step.question.answers.forEach { answer ->
+    step.question.answers.forEachIndexed { index, answer ->
         AnswerBlock(
             isAnswerStep = step.stepType in arrayOf(StepType.ERROR_ANSWER, StepType.CORRECT_ANSWER),
             answer = answer,
@@ -377,8 +441,11 @@ private fun ColumnScope.IncorrectAnswerStep(
             sendAction = sendAction,
             selectedAnswer = step.selectedAnswer
         )
+        if (index < step.question.answers.size - 1) {
+            Spacer(modifier = Modifier.height(24.dp))
+        }
     }
-
+    Spacer(modifier = Modifier.height(24.dp))
     AnswerBottomBlock(
         step = step,
         isCorrect = false,
@@ -441,5 +508,18 @@ private fun CorrectAnswerContent(
         }
 
         Spacer(modifier = Modifier.height(16.dp))
+    }
+}
+
+
+private suspend fun handleEffects(
+    effect: QuestionsEffects,
+    navigator: NavHostController
+) {
+    when(effect) {
+        QuestionsEffects.ExitQuestions -> {
+            val route = TasksDestination.navigationRoute()
+            navigator.navigate(route)
+        }
     }
 }

@@ -429,7 +429,7 @@ private fun GoalScreen(
         ) {
             GoalTypeItem(
                 title = stringResource(id = R.string.title_questionnaire_choice_goal_for_self_development),
-                iconId = R.drawable.image_light_yellow_circle,
+                iconId = R.drawable.image_yellow_light_circle,
                 isSelected = selectedGoals.contains(TaskGoalType.FOR_SELF_DEVELOPMENT),
                 selectableRole = Role.Checkbox,
                 onClick = {

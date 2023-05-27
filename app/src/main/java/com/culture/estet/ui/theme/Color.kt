@@ -17,3 +17,5 @@ val MusicBg = Color(0xFFDEE2FF)
 
 val PrimaryGreen = Color(0xFFB2C951)
 val PrimaryViolet = Color(0xFF9175AA)
+
+val LightPastelPurple = Color(0xFFB39DDB)
