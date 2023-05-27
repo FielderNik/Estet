@@ -29,7 +29,7 @@ fun EventsScreen(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            AppTopBar(title = "ANDROID", false) //todo
+            AppTopBar(title = "ANDROID", false, false) //todo
         },
     ) { paddingValues ->
 

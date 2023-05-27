@@ -16,6 +16,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import com.culture.estet.ui.presentation.navigation.TopLevelDestination
 import com.culture.estet.ui.theme.LightPastelPurple
+import com.culture.estet.ui.theme.Purple500
 
 @Composable
 fun AppBottomBar(
@@ -81,9 +82,9 @@ private fun RowScope.AppNavigationBarItem(
         label = label,
         alwaysShowLabel = alwaysShowLabel,
         colors = NavigationBarItemDefaults.colors(
-            selectedIconColor = Color.Black,
+            selectedIconColor = Purple500,
             unselectedIconColor = Color.White,
-            selectedTextColor = Color.Black,
+            selectedTextColor = Purple500,
             unselectedTextColor = Color.White,
             indicatorColor = LightPastelPurple,
         ),

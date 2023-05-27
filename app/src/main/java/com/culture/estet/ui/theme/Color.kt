@@ -19,3 +19,4 @@ val PrimaryGreen = Color(0xFFB2C951)
 val PrimaryViolet = Color(0xFF9175AA)
 
 val LightPastelPurple = Color(0xFFB39DDB)
+val Purple500 = Color(0xFF29194B)
