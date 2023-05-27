@@ -37,6 +37,12 @@
     <string name="title_score_many">  баллов</string>
     <string name="title_right_answer">Верный ответ</string>
 
+    <string name="title_screen_tasks">Задания</string>
+    <string name="title_screen_tournament">Соревнование</string>
+    <string name="title_screen_map">Школы искусств</string>
+    <string name="title_screen_courses">Курсы</string>
+    <string name="title_screen_feed">Лента</string>
+
 
     <string name="dialog_close_task_title">Закрыть задание</string>
     <string name="dialog_close_task_message">Вы уверены, что хотите покинуть задание?</string>

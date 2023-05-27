@@ -8,14 +8,13 @@ import androidx.navigation.compose.rememberNavController
 class AppTopBarState(
     val navController: NavHostController
 ) {
-    var title: String by mutableStateOf("HELLO")
+    var title: String by mutableStateOf("")
     var isShowBackNavigate by mutableStateOf(false)
     var isShowTopBar: Boolean by mutableStateOf(false)
 
 
     fun setupTopBar(
         title: String,
-        accentRange: IntRange? = null,
         isShowBackNavigate: Boolean = false
     ) {
         this.title = title
