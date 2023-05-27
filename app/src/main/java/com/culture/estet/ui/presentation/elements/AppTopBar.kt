@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.culture.estet.R
 import com.culture.estet.ui.presentation.localcomposition.LocalAppScreenState
+import com.culture.estet.ui.presentation.navigation.profile.ProfileDestination
 import com.culture.estet.ui.theme.LightPastelPurple
 
 @Composable
@@ -57,7 +58,7 @@ fun AppTopBar(
         ) {
             IconButton(
                 onClick = {
-                    appState.onBackClick()
+                    appState.navController.navigate(ProfileDestination.navigationRoute())
                 }
             ) {
                 Icon(

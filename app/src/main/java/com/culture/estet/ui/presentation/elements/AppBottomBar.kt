@@ -1,9 +1,9 @@
 package com.culture.estet.ui.presentation.elements
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.BottomAppBarDefaults.windowInsets
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import com.culture.estet.ui.presentation.navigation.TopLevelDestination
+import com.culture.estet.ui.theme.LightPastelPurple
 
 @Composable
 fun AppBottomBar(
@@ -27,7 +28,8 @@ fun AppBottomBar(
         modifier = Modifier
             .fillMaxWidth()
             .windowInsetsPadding(windowInsets)
-            .height(60.dp),
+            .height(56.dp)
+            .background(color = LightPastelPurple),
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -80,10 +82,10 @@ private fun RowScope.AppNavigationBarItem(
         alwaysShowLabel = alwaysShowLabel,
         colors = NavigationBarItemDefaults.colors(
             selectedIconColor = Color.Black,
-            unselectedIconColor = Color.LightGray,
+            unselectedIconColor = Color.White,
             selectedTextColor = Color.Black,
-            unselectedTextColor = Color.LightGray,
-            indicatorColor = MaterialTheme.colorScheme.surface,
+            unselectedTextColor = Color.White,
+            indicatorColor = LightPastelPurple,
         ),
     )
 }
