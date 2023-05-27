@@ -1,9 +1,22 @@
 package com.culture.estet.ui.presentation.feed
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.res.stringResource
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.culture.estet.R
+import com.culture.estet.ui.presentation.localcomposition.LocalAppTopBarState
 
 @Composable
-fun FeedScreen() {
-    Text(text = "FeedScreen")
+fun FeedScreen(
+    viewModel: FeedViewModel = hiltViewModel()
+) {
+    val appTopBarState = LocalAppTopBarState.current
+    val state = viewModel.state.collectAsState()
+    val title = stringResource(id = R.string.title_screen_feed)
+
+    LaunchedEffect(Unit) {
+        appTopBarState.title = title
+    }
 }

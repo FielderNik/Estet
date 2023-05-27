@@ -27,6 +27,7 @@ import com.culture.estet.R
 import com.culture.estet.domain.models.tasks.TaskCategory
 import com.culture.estet.domain.models.tasks.TaskArtType
 import com.culture.estet.ui.presentation.localcomposition.LocalAppScreenState
+import com.culture.estet.ui.presentation.localcomposition.LocalAppTopBarState
 import com.culture.estet.ui.presentation.navigation.tasks.QuestionnaireDestination
 import com.culture.estet.ui.presentation.navigation.tasks.TaskLevelDestination
 import com.culture.estet.ui.theme.PrimaryGreen
@@ -36,11 +37,16 @@ import kotlinx.coroutines.launch
 fun TasksScreen(
     viewModel: TasksViewModel = hiltViewModel()
 ) {
-
+    val appTopBarState = LocalAppTopBarState.current
     val state = viewModel.state.collectAsState()
+    val title = stringResource(id = R.string.title_screen_tasks)
 
     LaunchedEffect(Unit) {
         viewModel.sendAction(TasksAction.Initialize)
+    }
+
+    LaunchedEffect(Unit) {
+        appTopBarState.title = title
     }
 
 

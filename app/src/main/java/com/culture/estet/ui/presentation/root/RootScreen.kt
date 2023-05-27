@@ -49,6 +49,7 @@ fun RootScreen(
         appScreenState.navController.currentBackStackEntryFlow.flowWithLifecycle(lifecycle).collect { navBackStackEntry ->
             if (navBackStackEntry.destination.route in TopLevelDestination.values().map { it.route }) {
                 appScreenState.shouldShowBottomBar.value = true
+                appTopBarState.isShowTopBar = true
             }
         }
     }
