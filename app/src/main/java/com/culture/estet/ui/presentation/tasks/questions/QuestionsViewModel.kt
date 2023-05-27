@@ -23,7 +23,8 @@ class QuestionsViewModel @Inject constructor(
 
     val steps: MutableSharedFlow<Step> = MutableSharedFlow()
     private val questionsQueue = ArrayDeque<Question>()
-    private var currentStatistics: Statistics = Statistics(0,0)
+    private var currentStatistics: Statistics = Statistics(0,0, 0)
+    lateinit var currentArtType: TaskArtType
 
     override fun sendAction(action: QuestionsAction) {
         launchOnMain {
@@ -42,8 +43,20 @@ class QuestionsViewModel @Inject constructor(
                 QuestionsAction.NextQuestion -> {
                     nextQuestion()
                 }
+                QuestionsAction.SaveResultsAndExit -> {
+                    saveResult()
+                    exitQuestions()
+                }
             }
         }
+    }
+
+    private suspend fun exitQuestions() {
+        sendEffect(QuestionsEffects.ExitQuestions)
+    }
+
+    private suspend fun saveResult() {
+       //todo
     }
 
     private fun fillStatistics() {
@@ -59,13 +72,16 @@ class QuestionsViewModel @Inject constructor(
                 question = Question.getEmptyQuestion(),
                 isFinishStep = questionsQueue.isEmpty(),
                 statistics = currentStatistics,
+                selectedAnswer = null
             )
         } else {
+            incrementCurrentQuestion()
             Step(
                 stepType = StepType.QUESTION,
                 question = question,
                 isFinishStep = questionsQueue.isEmpty(),
-                statistics = currentStatistics
+                statistics = currentStatistics,
+                selectedAnswer = null,
             )
         }
         steps.emit(step)
@@ -77,15 +93,18 @@ class QuestionsViewModel @Inject constructor(
             incrementCorrectAnswer()
             Step(
                 stepType = StepType.CORRECT_ANSWER,
-                question = currentQuestion, isFinishStep = false,
-                statistics = currentStatistics
+                question = currentQuestion,
+                isFinishStep = false,
+                statistics = currentStatistics,
+                selectedAnswer = selectedAnswer,
             )
         } else {
             Step(
                 stepType = StepType.ERROR_ANSWER,
                 question = currentQuestion,
                 isFinishStep = false,
-                statistics = currentStatistics
+                statistics = currentStatistics,
+                selectedAnswer = selectedAnswer,
             )
         }
         steps.emit(step)
@@ -106,7 +125,6 @@ class QuestionsViewModel @Inject constructor(
                 nextQuestion()
             }
 
-
     }
 
     private fun next(): Question? {
@@ -115,7 +133,14 @@ class QuestionsViewModel @Inject constructor(
 
     private fun incrementCorrectAnswer() {
         currentStatistics = currentStatistics.copy(
-            correctAnswerCount = currentStatistics.correctAnswerCount + 1)
+            correctAnswerCount = currentStatistics.correctAnswerCount + 1,
+        )
+    }
+
+    private fun incrementCurrentQuestion() {
+        currentStatistics = currentStatistics.copy(
+            currentQuestionCount = currentStatistics.currentQuestionCount + 1
+        )
     }
 
 

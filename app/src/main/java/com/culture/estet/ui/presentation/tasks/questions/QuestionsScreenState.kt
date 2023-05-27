@@ -11,11 +11,12 @@ data class QuestionsScreenState(
 )
 
 sealed class QuestionsEffects {
-
+    object ExitQuestions : QuestionsEffects()
 }
 
 sealed class QuestionsAction {
     data class Initialize(val userId: String, val artType: TaskArtType, val levelType: TaskLevelType) : QuestionsAction()
     data class SendAnswer(val answer: Answer, val question: Question) : QuestionsAction()
     object NextQuestion : QuestionsAction()
+    object SaveResultsAndExit : QuestionsAction()
 }
