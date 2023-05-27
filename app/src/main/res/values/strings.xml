@@ -42,6 +42,7 @@
     <string name="title_screen_map">Школы искусств</string>
     <string name="title_screen_courses">Курсы</string>
     <string name="title_screen_feed">Лента</string>
+    <string name="title_screen_profile">Профиль</string>
 
 
     <string name="dialog_close_task_title">Закрыть задание</string>
