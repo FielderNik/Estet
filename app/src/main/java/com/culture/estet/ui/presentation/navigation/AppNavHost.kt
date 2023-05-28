@@ -10,6 +10,7 @@ import com.culture.estet.ui.presentation.navigation.map.createMapGraph
 import com.culture.estet.ui.presentation.navigation.profile.createProfileGraph
 import com.culture.estet.ui.presentation.navigation.tasks.*
 import com.culture.estet.ui.presentation.navigation.tournament.createTournamentGraph
+import com.culture.estet.ui.presentation.navigation.webview.createWebViewGraph
 
 @Composable
 fun AppNavHost(
@@ -33,6 +34,8 @@ fun AppNavHost(
         createQuestionnaireGraph()
         createQuestionsGraph()
         createTaskLevelGraph()
+
+        createWebViewGraph()
 
     }
 }

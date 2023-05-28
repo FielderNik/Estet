@@ -44,12 +44,25 @@
     <string name="title_screen_feed">Лента</string>
     <string name="title_screen_profile">Профиль</string>
     <string name="title_screen_task">Задание</string>
+    <string name="title_screen_view">"Просмотр"</string>
+
+    <string name="title_news_feed_announces">Анонс ближайших событий</string>
+    <string name="title_news_feed_birthdays">Дни рождения</string>
+    <string name="title_news_feed_interview">Интервью</string>
 
     <string name="label_tournament_filter_all">Все</string>
     <string name="label_tournament_filter_theatre">Театр</string>
     <string name="label_tournament_filter_dance">Танцы</string>
     <string name="label_tournament_filter_music">Музыка</string>
     <string name="label_tournament_filter_painting">Живопись</string>
+
+    <string name="label_feed_category_theatre">Театр</string>
+    <string name="label_feed_category_dance">Танцы</string>
+    <string name="label_feed_category_music">Музыка</string>
+    <string name="label_feed_category_painting">Живопись</string>
+    <string name="label_feed_category_seminars">Семинары</string>
+    <string name="label_feed_category_interview">Интервью</string>
+    <string name="label_feed_category_grants">Гранты</string>
 
 
     <string name="dialog_close_task_title">Закрыть задание</string>

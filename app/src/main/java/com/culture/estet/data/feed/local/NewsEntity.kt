@@ -28,13 +28,13 @@ data class NewsEntity(
     }
 }
 
-fun NewsEntity.toNews(): News {
-    return News(
-        id = id,
-        title = title,
-        subtitle = subtitle,
-        date = date
-    )
-}
+//fun NewsEntity.toNews(): News {
+//    return News(
+//        id = id,
+//        title = title,
+//        subtitle = subtitle,
+//        date = date
+//    )
+//}
 
-fun List<NewsEntity>.toNewsList() = map(NewsEntity::toNews)
+//fun List<NewsEntity>.toNewsList() = map(NewsEntity::toNews)

@@ -7,5 +7,9 @@ fun generateId(): String {
 }
 
 fun generateUserId(id: Int): String {
-    return "user_id_$id"
+    return "user_id_2_$id"
+}
+
+fun generateBirthdayId(id: Int): String {
+    return "birthday_id_1_$id"
 }
