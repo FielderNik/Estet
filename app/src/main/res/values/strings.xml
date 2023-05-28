@@ -55,5 +55,10 @@
     <string name="action_finish">Завершить</string>
     <string name="action_next">Дальше</string>
 
+    <string name="bad_internet_title">Нет подключения к интернету</string>
+    <string name="bad_internet_subtitle">Карта может работать нестабильно</string>
+
+    <string name="opening_hours">Время работы</string>
+
 
 </resources>
