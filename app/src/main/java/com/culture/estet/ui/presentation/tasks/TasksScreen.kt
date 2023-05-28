@@ -31,6 +31,7 @@ import com.culture.estet.ui.presentation.localcomposition.LocalAppTopBarState
 import com.culture.estet.ui.presentation.navigation.tasks.QuestionnaireDestination
 import com.culture.estet.ui.presentation.navigation.tasks.TaskLevelDestination
 import com.culture.estet.ui.theme.PrimaryGreen
+import com.culture.estet.ui.theme.Purple500
 import kotlinx.coroutines.launch
 
 @Composable
@@ -92,7 +93,7 @@ private fun TasksInProgressScreen(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 48.dp, start = 16.dp, end = 16.dp, bottom = 48.dp),
+                    .padding(top = 36.dp, start = 16.dp, end = 16.dp, bottom = 48.dp),
                 contentAlignment = Alignment.Center
             ) {
                 TaskCategoryContent(
@@ -111,13 +112,13 @@ private fun TasksInProgressScreen(
             horizontalArrangement = Arrangement.Center
         ) {
             repeat(tasks.size) { iteration ->
-                val color = if (pagerState.currentPage == iteration) Color.DarkGray else Color.LightGray
+                val color = if (pagerState.currentPage == iteration) Purple500 else Color.LightGray
                 Box(
                     modifier = Modifier
                         .padding(2.dp)
                         .clip(CircleShape)
                         .background(color)
-                        .size(20.dp)
+                        .size(12.dp)
 
                 )
             }
@@ -145,7 +146,7 @@ private fun TaskCategoryContent(
             .clickable {
                 navigator.navigate(TaskLevelDestination.navigationRoute(userId, taskCategory.type))
             }
-            .padding(start = 24.dp, end = 24.dp, top = 56.dp, bottom = 56.dp),
+            .padding(start = 24.dp, end = 24.dp, top = 40.dp, bottom = 40.dp),
 
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -199,102 +200,6 @@ private fun TaskCategoryImage(artType: TaskArtType) {
     )
 }
 
-
-//@Composable
-//private fun TasksInProgressScreen(
-//    userId: String?,
-//    tasks: List<Task>?,
-//) {
-//    val coroutineScope = rememberCoroutineScope()
-//    val navigator = LocalAppScreenState.current.navController
-//
-//    Scaffold(
-//        floatingActionButtonPosition = FabPosition.End,
-//        floatingActionButton = {
-//            FloatingActionButton(
-//                onClick = {
-//                    userId?.also {
-//                        coroutineScope.launch {
-//                            val route = QuestionnaireDestination.navigationRoute(userId)
-//                            navigator.navigate(route)
-//                        }
-//                    }
-//                },
-//                containerColor = PrimaryViolet,
-//                contentColor = Color.White
-//            ) {
-//                Icon(painter = painterResource(id = R.drawable.icon_add), contentDescription = null)
-//            }
-//        }
-//    ) { paddingValues ->
-//
-//        LazyVerticalGrid(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .padding(paddingValues = paddingValues),
-//            columns = GridCells.Fixed(2),
-//            contentPadding = PaddingValues(horizontal = 8.dp, vertical = 16.dp),
-//            horizontalArrangement = Arrangement.spacedBy(8.dp),
-//            verticalArrangement = Arrangement.spacedBy(8.dp)
-//        ) {
-//            tasks?.also {
-//                items(tasks) { task ->
-//                    TaskBlock(task = task)
-//                }
-//            }
-//        }
-//    }
-//
-//}
-
-//@Composable
-//private fun TaskBlock(task: Task) {
-//
-//    Box(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .background(task.type.background(), shape = RoundedCornerShape(24.dp))
-//            .height(160.dp),
-//    ) {
-//        Column(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(top = 8.dp, start = 8.dp, end = 8.dp, bottom = 12.dp)
-//        ) {
-//            Image(
-//                painter = painterResource(id = task.type.painterSource()),
-//                contentDescription = null,
-//                modifier = Modifier.size(80.dp)
-//            )
-//            Spacer(modifier = Modifier.weight(1f))
-//            ProgressTask(questionsCount = task.questionsCount, answerCount = task.answerCount)
-//
-//            Text(
-//                modifier = Modifier.fillMaxWidth(),
-//                text = stringResource(id = task.type.stringSource()).uppercase(),
-//                maxLines = 1,
-//                fontSize = 22.sp,
-//                fontWeight = FontWeight.Black,
-//                color = Color.Black.copy(alpha = 0.4f),
-//            )
-//        }
-//
-//        Box(
-//            modifier = Modifier
-//                .align(Alignment.TopEnd)
-//                .size(48.dp)
-//                .background(
-//                    color = PrimaryGreen,
-//                    shape = RoundedCornerShape(topEnd = 24.dp, bottomStart = 24.dp)
-//                ), contentAlignment = Alignment.Center
-//        ) {
-//            Image(
-//                painter = painterResource(id = task.level.iconSource()),
-//                contentDescription = null
-//            )
-//        }
-//    }
-//}
 
 @Composable
 private fun ProgressTask(
