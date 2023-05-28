@@ -22,8 +22,6 @@ android {
             useSupportLibrary true
         }
 
-        Properties properties = new Properties()
-        properties.load(project.rootProject.file('local.properties').newDataInputStream())
         resValue "string", "API_KEY", "558268b1-4054-4a48-b51e-4f6edc676020"
 
     }
