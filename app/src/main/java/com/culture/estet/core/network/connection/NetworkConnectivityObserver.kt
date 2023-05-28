@@ -3,9 +3,7 @@ package com.culture.estet.core.network.connection
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
-import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -48,5 +46,9 @@ class NetworkConnectivityObserver @Inject constructor(
             connectivityManager.registerDefaultNetworkCallback(callback)
             awaitClose { connectivityManager.unregisterNetworkCallback(callback) }
         }.distinctUntilChanged()
+    }
+
+    override fun currentConnection(): ConnectivityObserver.Status {
+        return connectivityManager.activeNetwork?.let { ConnectivityObserver.Status.AVAILABLE } ?: ConnectivityObserver.Status.UNAVAILABLE
     }
 }

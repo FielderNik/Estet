@@ -6,11 +6,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.culture.estet.data.feed.local.NewsDao
 import com.culture.estet.data.feed.local.NewsEntity
+import com.culture.estet.data.map.local.SchoolEntity
+import com.culture.estet.data.map.local.SchoolsDao
 
-@Database(entities = [NewsEntity::class], version = 1)
+@Database(entities = [NewsEntity::class, SchoolEntity::class], version = 2)
+@TypeConverters(PointConverter::class)
 abstract class MainDatabase : RoomDatabase() {
 
     abstract fun newsDao(): NewsDao
+    abstract fun schoolsDao(): SchoolsDao
 
     companion object {
         @Volatile

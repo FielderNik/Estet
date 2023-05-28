@@ -2,11 +2,12 @@ package com.culture.estet.di
 
 import android.content.Context
 import com.culture.estet.data.db.MainDatabase
-import com.culture.estet.data.feed.repository.NewsRepository
-import com.culture.estet.data.feed.repository.NewsRepositoryImpl
 import com.culture.estet.data.feed.local.NewsDao
 import com.culture.estet.data.feed.remote.NewsRemoteDataSource
-import com.culture.estet.data.feed.remote.RetrofitRemoteDataSource
+import com.culture.estet.data.feed.remote.RetrofitNewsRemoteDataSource
+import com.culture.estet.data.map.local.SchoolsDao
+import com.culture.estet.data.map.remote.RetrofitSchoolsRemoteDataSource
+import com.culture.estet.data.map.remote.SchoolsRemoteDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -20,7 +21,10 @@ import javax.inject.Singleton
 interface DataSourceModule {
     @Binds
     @Singleton
-    fun bindNetworkDataSource(dataSource: RetrofitRemoteDataSource): NewsRemoteDataSource
+    fun bindNewsNetworkDataSource(dataSource: RetrofitNewsRemoteDataSource): NewsRemoteDataSource
+    @Binds
+    @Singleton
+    fun bindSchoolsNetworkDataSource(dataSource: RetrofitSchoolsRemoteDataSource): SchoolsRemoteDataSource
 }
 
 @Module
@@ -28,5 +32,7 @@ interface DataSourceModule {
 object DatabaseModule {
 
     @Provides
-    fun provideTaskDao(@ApplicationContext context: Context): NewsDao = MainDatabase.getInstance(context).newsDao()
+    fun provideNewsDao(@ApplicationContext context: Context): NewsDao = MainDatabase.getInstance(context).newsDao()
+    @Provides
+    fun provideSchoolDao(@ApplicationContext context: Context): SchoolsDao = MainDatabase.getInstance(context).schoolsDao()
 }
