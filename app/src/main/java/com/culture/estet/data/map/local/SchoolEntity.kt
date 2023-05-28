@@ -36,7 +36,7 @@ data class SchoolEntity(
     }
 }
 
-private class PointConverter {
+class PointConverter {
     @TypeConverter
     fun fromPoint(point: GeoPoint): String {
         return "${point.lat},${point.lon}"

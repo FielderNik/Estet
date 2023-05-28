@@ -10,6 +10,7 @@ import com.culture.estet.data.map.local.SchoolEntity
 import com.culture.estet.data.map.local.SchoolsDao
 
 @Database(entities = [NewsEntity::class, SchoolEntity::class], version = 2)
+@TypeConverters(PointConverter::class)
 abstract class MainDatabase : RoomDatabase() {
 
     abstract fun newsDao(): NewsDao
