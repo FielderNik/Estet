@@ -290,7 +290,7 @@ private fun HeaderBlock(
                 }
             }
         ) {
-            Icon(painter = painterResource(id = R.drawable.icon_close), contentDescription = null, tint = Color.Black)
+            Icon(painter = painterResource(id = R.drawable.icon_close), contentDescription = null, tint = if (isSystemInDarkTheme()) Color.White else Color.Black)
         }
     }
 }
@@ -491,7 +491,7 @@ private fun CorrectAnswerContent(
         Text(
             text = correctAnswer.answer.uppercase(),
             fontSize = 24.sp,
-            color = Purple500,
+            color = if (isSystemInDarkTheme()) LightPastelPurple else Purple500,
             fontWeight = FontWeight.Bold,
         )
         Spacer(modifier = Modifier.height(8.dp))
@@ -507,7 +507,7 @@ private fun CorrectAnswerContent(
             verticalAlignment = Alignment.CenterVertically
         ) {
             if (isCorrect) {
-                Text(text = "+ $score балл", color = Purple500, fontWeight = FontWeight.Bold)
+                Text(text = "+ $score балл", color = if (isSystemInDarkTheme()) LightPastelPurple else Purple500, fontWeight = FontWeight.Bold)
             } else {
                 Box(modifier = Modifier.width(16.dp))
             }

@@ -16,10 +16,16 @@ val TheatreBg = Color(0xFFD2C5E2)
 val DanceBg = Color(0xFF74B076)
 val MusicBg = Color(0xFFC6D75E)
 
+val PaintingBgDark = Color(0xFF685059)
+val TheatreBgDark = Color(0xFF5F536F)
+val DanceBgDark = Color(0xFF366153)
+val MusicBgDark = Color(0xFF24491B)
+
 val PrimaryGreen = Color(0xFFB2C951)
 val PrimaryViolet = Color(0xFF9175AA)
 
 val LightPastelPurple = Color(0xFFB39DDB)
+val DarkPastelPurple = Color(0xFF413850)
 val Purple500 = Color(0xFF29194B)
 
 val DarkGreen = Color(0xFF74B076)

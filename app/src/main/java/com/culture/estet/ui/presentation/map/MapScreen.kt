@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -195,7 +196,7 @@ private fun PlusButton() {
         modifier = Modifier
             .clip(RoundedCornerShape(MaterialTheme.shapes.large.topStart))
             .size(56.dp)
-            .background(Color.White, MaterialTheme.shapes.large)
+            .background(if (isSystemInDarkTheme()) Color.DarkGray else Color.White, MaterialTheme.shapes.large)
             .border(1.dp, Color.Black, MaterialTheme.shapes.large)
             .shadow(8.dp, MaterialTheme.shapes.large),
         onClick = {
@@ -209,8 +210,8 @@ private fun PlusButton() {
                 )
             }
         },
-        containerColor = Color.White,
-        contentColor = Purple40
+        containerColor = if (isSystemInDarkTheme()) Color.DarkGray else Color.White,
+        contentColor = if (isSystemInDarkTheme()) Color.White else Purple40
     ) {
         Icon(
             modifier = Modifier.size(28.dp),
@@ -242,8 +243,8 @@ private fun MinusButton() {
                 )
             }
         },
-        containerColor = Color.White,
-        contentColor = Purple40
+        containerColor = if (isSystemInDarkTheme()) Color.DarkGray else Color.White,
+        contentColor = if (isSystemInDarkTheme()) Color.White else Purple40
     ) {
         Icon(
             modifier = Modifier.size(28.dp),
