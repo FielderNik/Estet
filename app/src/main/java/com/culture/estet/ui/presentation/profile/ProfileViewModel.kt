@@ -7,7 +7,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
 
-) : BaseViewModel<ProfileScreenState, ProfileEffect, ProfileAction>(ProfileScreenState.Loading){
+) : BaseViewModel<ProfileScreenState, ProfileEffect, ProfileAction>(ProfileScreenState.ProfileState("")){
 
     override fun sendAction(action: ProfileAction) {
         launchOnMain {
