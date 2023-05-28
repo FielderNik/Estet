@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Estet</string>
+    <string name="app_name">Эстет</string>
 
     <string name="title_dance">Танцы</string>
     <string name="title_theatre">Театр</string>
@@ -81,5 +81,10 @@
 
     <string name="opening_hours">Время работы</string>
 
+    <string name="name">Имя</string>
+    <string name="age">Возраст</string>
+    <string name="gender">Пол</string>
+    <string name="phone">Телефон</string>
+    <string name="email">Почта</string>
 
 </resources>
