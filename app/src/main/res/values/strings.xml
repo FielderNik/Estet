@@ -51,6 +51,14 @@
     <string name="label_tournament_filter_music">Музыка</string>
     <string name="label_tournament_filter_painting">Живопись</string>
 
+    <string name="label_feed_category_theatre">Театр</string>
+    <string name="label_feed_category_dance">Танцы</string>
+    <string name="label_feed_category_music">Музыка</string>
+    <string name="label_feed_category_painting">Живопись</string>
+    <string name="label_feed_category_seminars">Семинары</string>
+    <string name="label_feed_category_interview">Интервью</string>
+    <string name="label_feed_category_grants">Гранты</string>
+
 
     <string name="dialog_close_task_title">Закрыть задание</string>
     <string name="dialog_close_task_message">Вы уверены, что хотите покинуть задание?</string>

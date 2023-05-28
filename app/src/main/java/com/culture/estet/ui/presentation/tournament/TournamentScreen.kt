@@ -93,7 +93,7 @@ private fun FilterBlock(
     sendAction: (TournamentAction) -> Unit,
 ) {
     val filters = TournamentFilter.values()
-    FlowRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+    FlowRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally)) {
         filters.forEachIndexed { index, tournamentFilter ->
             FilterChip(
                 selected = tournamentFilter == selectedFilter,
@@ -143,7 +143,7 @@ private fun UserItem(
             model = ImageRequest.Builder(LocalContext.current).data(user.avatar).crossfade(true).build(),
             contentDescription = null,
             loading = {
-                CircularProgressIndicator(trackColor = Color.Gray, strokeCap = StrokeCap.Round)
+                CircularProgressIndicator(color = Color.Gray, strokeCap = StrokeCap.Round, strokeWidth = 2.dp)
             },
             error = {
                 Box(

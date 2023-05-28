@@ -26,13 +26,13 @@ fun NewsResponse.toNewsEntity(): NewsEntity {
     )
 }
 
-fun NewsResponse.toNews(): News {
-    return News(
-        id = generateId(),
-        title = title,
-        subtitle = subtitle,
-        date = date
-    )
-}
+//fun NewsResponse.toNews(): News {
+//    return News(
+//        id = generateId(),
+//        title = title,
+//        subtitle = subtitle,
+//        date = date
+//    )
+//}
 fun List<NewsResponse>.toNewsListEntity() = map(NewsResponse::toNewsEntity)
-fun List<NewsResponse>.toNewsList() = map(NewsResponse::toNews)
+//fun List<NewsResponse>.toNewsList() = map(NewsResponse::toNews)

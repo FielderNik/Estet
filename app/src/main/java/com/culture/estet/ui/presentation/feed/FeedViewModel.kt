@@ -5,7 +5,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class FeedViewModel @Inject constructor() : BaseViewModel<FeedScreenState, FeedEffect, FeedAction>(FeedScreenState.FeedFilled("")) {
+class FeedViewModel @Inject constructor(
+
+) : BaseViewModel<FeedScreenState, FeedEffect, FeedAction>(FeedScreenState.Loading) {
+
     override fun sendAction(action: FeedAction) {
         launchOnMain {
 
