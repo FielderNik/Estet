@@ -6,7 +6,7 @@ data class News(
     val id: String,
     val title: String,
     val subtitle: String?,
-    val date: String,
+    val date: String?,
     val category: NewsCategory,
     val imageUrl: String,
     val newsUrl: String,
