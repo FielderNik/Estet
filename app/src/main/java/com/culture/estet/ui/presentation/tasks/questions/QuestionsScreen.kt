@@ -37,6 +37,7 @@ import com.culture.estet.ui.presentation.elements.ArtImage
 import com.culture.estet.ui.presentation.elements.dialogs.ConfirmExitDialog
 import com.culture.estet.ui.presentation.elements.dialogs.DialogButton
 import com.culture.estet.ui.presentation.localcomposition.LocalAppScreenState
+import com.culture.estet.ui.presentation.localcomposition.LocalAppTopBarState
 import com.culture.estet.ui.presentation.localcomposition.LocalBottomSheetEventBus
 import com.culture.estet.ui.presentation.localcomposition.LocalDialogEventBus
 import com.culture.estet.ui.presentation.navigation.tasks.TasksDestination
@@ -55,6 +56,9 @@ fun QuestionsScreen(
 ) {
     val lifecycle = LocalLifecycleOwner.current.lifecycle
     val navigator = LocalAppScreenState.current.navController
+    val appTopBarState = LocalAppTopBarState.current
+    val title = stringResource(id = artType.stringSource())
+
     val step = viewModel.steps.collectAsState(initial = null)
 
     LaunchedEffect(Unit) {
@@ -74,6 +78,12 @@ fun QuestionsScreen(
                 navigator = navigator
             )
         }
+    }
+
+    LaunchedEffect(Unit) {
+        appTopBarState.title = title
+        appTopBarState.isShowBackNavigate = true
+        appTopBarState.isShowProfile = false
     }
 
 
@@ -111,6 +121,7 @@ private fun StepData(
     sendAction: (QuestionsAction) -> Unit,
 ) {
     val scrollState = rememberScrollState()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -120,6 +131,7 @@ private fun StepData(
         HeaderBlock(statistics = step.statistics, sendAction = sendAction)
         if (step.stepType != StepType.FINAL) {
             QuestionBlock(artType, step.question.question)
+            Spacer(modifier = Modifier.height(16.dp))
         }
 
         when (step.stepType) {
@@ -161,7 +173,7 @@ private fun ColumnScope.QuestionStep(
     sendAction: (QuestionsAction) -> Unit,
 ) {
 
-    step.question.answers.forEachIndexed { index, answer ->  
+    step.question.answers.forEachIndexed { index, answer ->
         AnswerBlock(
             isAnswerStep = step.stepType in arrayOf(StepType.ERROR_ANSWER, StepType.CORRECT_ANSWER),
             answer = answer,
@@ -172,7 +184,7 @@ private fun ColumnScope.QuestionStep(
         if (index < step.question.answers.size - 1) {
             Spacer(modifier = Modifier.height(24.dp))
         }
-        
+
     }
 }
 
@@ -217,7 +229,8 @@ private fun QuestionBlock(
 ) {
     Row(modifier = Modifier.fillMaxWidth()) {
         ArtImage(
-            size = 160.dp, artType = artType
+            modifier = Modifier.size(120.dp),
+            artType = artType
         )
         Text(text = question, fontSize = 24.sp)
     }
@@ -389,32 +402,38 @@ private fun ColumnScope.FinalScreen(
     step: Step,
     sendAction: (QuestionsAction) -> Unit,
 ) {
-    
+
     val scoreAnnotatedString = buildAnnotatedString {
         withStyle(style = SpanStyle(fontSize = 24.sp)) {
             append(stringResource(id = R.string.title_you_collect_some_score))
         }
 
-        withStyle(style = SpanStyle(fontSize = 120.sp, color = LightPastelPurple, fontWeight = FontWeight.Black, )) {
-            append("${step.statistics.currentQuestionCount}")
+        withStyle(style = SpanStyle(fontSize = 96.sp, color = LightPastelPurple, fontWeight = FontWeight.Black)) {
+            append("${step.statistics.correctAnswerCount}")
         }
 
         withStyle(style = SpanStyle(fontSize = 24.sp)) {
-            append(stringResource(id = scoreText(step.statistics.currentQuestionCount)))
+            append(stringResource(id = scoreText(step.statistics.correctAnswerCount)))
         }
     }
     Text(text = stringResource(id = R.string.title_congratulation), fontSize = 32.sp, lineHeight = 36.sp)
     Text(text = stringResource(id = R.string.title_task_finished), fontSize = 32.sp, lineHeight = 36.sp)
 
-
     Text(text = scoreAnnotatedString)
 
-    ArtImage(
-        modifier = Modifier.offset(x = (-72).dp),
-        size = 240.dp,
-        artType = artType
-    )
-    Spacer(modifier = Modifier.weight(1f))
+    Box(modifier = Modifier
+        .fillMaxSize()
+        .weight(1f), contentAlignment = Alignment.Center) {
+
+        ArtImage(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            artType = artType
+        )
+    }
+
+    Spacer(modifier = Modifier.height(16.dp))
     Button(
         modifier = Modifier
             .fillMaxWidth()
@@ -467,10 +486,10 @@ private fun CorrectAnswerContent(
 
     Column() {
         Text(
-            modifier = Modifier.fillMaxWidth(), 
-            text = stringResource(id = R.string.title_correct_answer), 
-            fontSize = 24.sp, 
-            fontWeight = FontWeight.Bold, 
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(id = R.string.title_correct_answer),
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(32.dp))
@@ -516,7 +535,7 @@ private suspend fun handleEffects(
     effect: QuestionsEffects,
     navigator: NavHostController
 ) {
-    when(effect) {
+    when (effect) {
         QuestionsEffects.ExitQuestions -> {
             val route = TasksDestination.navigationRoute()
             navigator.navigate(route)

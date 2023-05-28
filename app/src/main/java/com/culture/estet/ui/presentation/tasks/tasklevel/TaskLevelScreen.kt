@@ -19,10 +19,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.culture.estet.R
 import com.culture.estet.domain.models.tasks.TaskArtType
 import com.culture.estet.domain.models.tasks.TaskLevel
-import com.culture.estet.R
 import com.culture.estet.ui.presentation.localcomposition.LocalAppScreenState
+import com.culture.estet.ui.presentation.localcomposition.LocalAppTopBarState
 import com.culture.estet.ui.presentation.navigation.tasks.QuestionsDestination
 
 @Composable
@@ -33,6 +34,8 @@ fun TaskLevelScreen(
 ) {
     val appScreenState = LocalAppScreenState.current
     val state = viewModel.state.collectAsState()
+    val appTopBarState = LocalAppTopBarState.current
+    val title = stringResource(id = artType.stringSource())
 
     LaunchedEffect(Unit) {
         viewModel.sendAction(TaskLevelAction.Initialize(userId = userId, artType = artType))
@@ -40,6 +43,12 @@ fun TaskLevelScreen(
 
     LaunchedEffect(Unit) {
         appScreenState.shouldShowBottomBar.value = false
+    }
+
+    LaunchedEffect(Unit) {
+        appTopBarState.isShowBackNavigate = true
+        appTopBarState.isShowProfile = true
+        appTopBarState.title = title
     }
 
     TaskLevelContent(userId = userId, state = state.value, sendAction = viewModel::sendAction)

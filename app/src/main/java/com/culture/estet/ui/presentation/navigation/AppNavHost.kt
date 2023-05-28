@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import com.culture.estet.ui.presentation.navigation.courses.createCoursesGraph
 import com.culture.estet.ui.presentation.navigation.feed.createFeedGraph
 import com.culture.estet.ui.presentation.navigation.map.createMapGraph
+import com.culture.estet.ui.presentation.navigation.profile.createProfileGraph
 import com.culture.estet.ui.presentation.navigation.tasks.*
 import com.culture.estet.ui.presentation.navigation.tournament.createTournamentGraph
 
@@ -27,6 +28,7 @@ fun AppNavHost(
         createMapGraph()
         createCoursesGraph()
         createFeedGraph()
+        createProfileGraph()
 
         createQuestionnaireGraph()
         createQuestionsGraph()

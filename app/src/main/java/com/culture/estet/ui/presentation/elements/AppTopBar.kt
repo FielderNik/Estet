@@ -13,12 +13,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.culture.estet.R
 import com.culture.estet.ui.presentation.localcomposition.LocalAppScreenState
+import com.culture.estet.ui.presentation.navigation.profile.ProfileDestination
 import com.culture.estet.ui.theme.LightPastelPurple
 
 @Composable
 fun AppTopBar(
     title: String,
     isShowNavigateBack: Boolean,
+    isShowProfile: Boolean,
 ) {
     val appState = LocalAppScreenState.current
 
@@ -55,16 +57,19 @@ fun AppTopBar(
             .fillMaxHeight()
             .widthIn(36.dp), contentAlignment = Alignment.Center
         ) {
-            IconButton(
-                onClick = {
-                    appState.onBackClick()
+            if (isShowProfile) {
+
+                IconButton(
+                    onClick = {
+                        appState.navController.navigate(ProfileDestination.navigationRoute())
+                    }
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.icon_profile),
+                        contentDescription = null,
+                        tint = Color.White
+                    )
                 }
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.icon_profile),
-                    contentDescription = null,
-                    tint = Color.White
-                )
             }
         }
 
