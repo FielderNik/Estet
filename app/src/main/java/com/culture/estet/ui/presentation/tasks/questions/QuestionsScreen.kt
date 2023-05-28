@@ -45,7 +45,9 @@ import com.culture.estet.ui.presentation.navigation.tasks.navigateToTasks
 import com.culture.estet.ui.presentation.tasks.questions.model.Statistics
 import com.culture.estet.ui.presentation.tasks.questions.model.Step
 import com.culture.estet.ui.presentation.tasks.questions.model.StepType
+import com.culture.estet.ui.theme.DarkGreen
 import com.culture.estet.ui.theme.LightPastelPurple
+import com.culture.estet.ui.theme.Purple500
 
 @Composable
 fun QuestionsScreen(
@@ -288,15 +290,7 @@ private fun HeaderBlock(
                 }
             }
         ) {
-            Box(
-                modifier = Modifier
-                    .size(32.dp)
-                    .clip(CircleShape)
-                    .border(width = 1.dp, color = Color.Green, shape = CircleShape),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(painter = painterResource(id = R.drawable.icon_info), contentDescription = null, tint = Color.Black)
-            }
+            Icon(painter = painterResource(id = R.drawable.icon_close), contentDescription = null, tint = Color.Black)
         }
     }
 }
@@ -374,12 +368,13 @@ private fun AnswerBottomBlock(
                 modifier = Modifier
                     .size(32.dp)
                     .clip(CircleShape)
-                    .background(Color.Green), contentAlignment = Alignment.Center
+                    .background(DarkGreen), contentAlignment = Alignment.Center
             ) {
 
                 Icon(
                     painter = painterResource(id = R.drawable.icon_question),
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = Color.White
                 )
             }
             Text(text = stringResource(id = R.string.title_right_answer))
@@ -496,7 +491,7 @@ private fun CorrectAnswerContent(
         Text(
             text = correctAnswer.answer.uppercase(),
             fontSize = 24.sp,
-            color = Color.Green,
+            color = Purple500,
             fontWeight = FontWeight.Bold,
         )
         Spacer(modifier = Modifier.height(8.dp))
@@ -512,7 +507,7 @@ private fun CorrectAnswerContent(
             verticalAlignment = Alignment.CenterVertically
         ) {
             if (isCorrect) {
-                Text(text = "+ $score", color = Color.Green)
+                Text(text = "+ $score балл", color = Purple500, fontWeight = FontWeight.Bold)
             } else {
                 Box(modifier = Modifier.width(16.dp))
             }
@@ -522,7 +517,7 @@ private fun CorrectAnswerContent(
                     sendAction(QuestionsAction.NextQuestion)
                 }
             ) {
-                Text(text = "Дальше")
+                Text(text = stringResource(id = R.string.action_next))
             }
         }
 

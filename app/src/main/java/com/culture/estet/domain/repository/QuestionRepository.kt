@@ -15,7 +15,11 @@ interface QuestionRepository {
 class QuestionRepositoryImpl @Inject constructor(): BaseRepository(), QuestionRepository {
     override suspend fun getQuestionsByParameters(userId: String, artType: TaskArtType, levelType: TaskLevelType): Either<Failure, List<Question>> {
         return handleRequest {
-            Questions.questions
+            when(levelType) {
+                TaskLevelType.BEGINNER -> Questions.Lite.questionsLite
+                TaskLevelType.ADVANCED -> Questions.Advanced.questionsAdvanced
+                TaskLevelType.EXPERT -> Questions.Expert.questionsHard
+            }
         }
     }
 

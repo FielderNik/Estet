@@ -66,7 +66,7 @@
 
 
     <string name="dialog_close_task_title">Закрыть задание</string>
-    <string name="dialog_close_task_message">Вы уверены, что хотите покинуть задание?</string>
+    <string name="dialog_close_task_message">Вы уверены, что хотите закрыть задание?</string>
     <string name="dialog_close_task_question">Закрыть?</string>
 
     <string name="action_fill_questionnaire">Заполнить анкету</string>
