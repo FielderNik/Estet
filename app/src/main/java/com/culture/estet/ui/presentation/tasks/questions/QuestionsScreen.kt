@@ -272,7 +272,6 @@ private fun HeaderBlock(
                     ConfirmExitDialog(
                         title = stringResource(id = R.string.dialog_close_task_title),
                         message = stringResource(id = R.string.dialog_close_task_message),
-                        question = stringResource(id = R.string.dialog_close_task_question),
                         cancelButton = DialogButton(
                             labelRes = R.string.action_stay,
                             onClick = {
