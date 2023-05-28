@@ -68,5 +68,10 @@
 
     <string name="opening_hours">Время работы</string>
 
+    <string name="name">Имя</string>
+    <string name="age">Возраст</string>
+    <string name="gender">Пол</string>
+    <string name="phone">Телефон</string>
+    <string name="email">Почта</string>
 
 </resources>
