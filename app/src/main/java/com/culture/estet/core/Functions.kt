@@ -5,3 +5,7 @@ import java.util.UUID
 fun generateId(): String {
     return UUID.randomUUID().toString()
 }
+
+fun generateUserId(id: Int): String {
+    return "user_id_$id"
+}
