@@ -1,7 +1,6 @@
 package com.culture.estet.ui.presentation.profile
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,9 +11,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -41,6 +39,7 @@ import com.culture.estet.R
 import com.culture.estet.domain.models.profile.UserProfile
 import com.culture.estet.ui.presentation.localcomposition.LocalAppScreenState
 import com.culture.estet.ui.presentation.localcomposition.LocalAppTopBarState
+import com.culture.estet.ui.theme.DarkPastelPurple
 import com.culture.estet.ui.theme.PurpleWhite80
 
 @Composable
@@ -87,6 +86,11 @@ private fun ProfileData(
     user: UserProfile,
     sendAction: (ProfileAction) -> Unit,
 ) {
+    val logo = if (isSystemInDarkTheme()) {
+        R.drawable.image_logo_dark
+    } else {
+        R.drawable.moscow_art_schools_logo
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -94,11 +98,12 @@ private fun ProfileData(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Spacer(modifier = Modifier.height(16.dp))
         Image(
             modifier = Modifier
                 .width(247.dp)
                 .height(127.dp),
-            painter = painterResource(R.drawable.moscow_art_schools_logo),
+            painter = painterResource(logo),
             contentDescription = null,
         )
 
@@ -182,9 +187,7 @@ private fun InfoBlock(
         text = info,
         modifier = Modifier
             .fillMaxWidth()
-            .drawBehind {
-                drawRoundRect(color = PurpleWhite80, cornerRadius = CornerRadius(8.0f))
-            }
+            .background(if (isSystemInDarkTheme()) DarkPastelPurple else PurpleWhite80, shape = RoundedCornerShape(8.dp))
             .padding(horizontal = 16.dp, vertical = 12.dp),
         fontWeight = FontWeight.Bold
     )

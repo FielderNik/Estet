@@ -6,10 +6,7 @@ import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavType
 import com.culture.estet.R
-import com.culture.estet.ui.theme.DanceBg
-import com.culture.estet.ui.theme.MusicBg
-import com.culture.estet.ui.theme.PaintingBg
-import com.culture.estet.ui.theme.TheatreBg
+import com.culture.estet.ui.theme.*
 
 enum class TaskArtType {
     MUSIC,
@@ -37,12 +34,12 @@ enum class TaskArtType {
         }
     }
 
-    fun background(): Color {
+    fun background(isDarkTheme: Boolean): Color {
         return when(this) {
-            MUSIC -> MusicBg
-            DANCE -> DanceBg
-            THEATRE -> TheatreBg
-            PAINTING -> PaintingBg
+            MUSIC -> if (isDarkTheme) MusicBgDark else MusicBg
+            DANCE -> if (isDarkTheme) DanceBgDark else DanceBg
+            THEATRE -> if (isDarkTheme) TheatreBgDark else TheatreBg
+            PAINTING -> if (isDarkTheme) PaintingBgDark else PaintingBg
         }
     }
 }

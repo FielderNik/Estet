@@ -1,9 +1,6 @@
 package com.culture.estet.ui.presentation.tasks
 
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -144,7 +141,7 @@ private fun TaskCategoryContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(taskCategory.type.background(), shape = RoundedCornerShape(24.dp))
+            .background(taskCategory.type.background(isSystemInDarkTheme()), shape = RoundedCornerShape(24.dp))
             .clip(RoundedCornerShape(24.dp))
             .clickable {
                 navigator.navigate(TaskLevelDestination.navigationRoute(userId, taskCategory.type))

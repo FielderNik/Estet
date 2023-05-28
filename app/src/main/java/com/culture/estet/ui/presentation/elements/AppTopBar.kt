@@ -1,6 +1,7 @@
 package com.culture.estet.ui.presentation.elements
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -14,6 +15,7 @@ import androidx.compose.ui.unit.sp
 import com.culture.estet.R
 import com.culture.estet.ui.presentation.localcomposition.LocalAppScreenState
 import com.culture.estet.ui.presentation.navigation.profile.ProfileDestination
+import com.culture.estet.ui.theme.DarkPastelPurple
 import com.culture.estet.ui.theme.LightPastelPurple
 
 @Composable
@@ -28,7 +30,7 @@ fun AppTopBar(
         modifier = Modifier
             .fillMaxWidth()
             .height(56.dp)
-            .background(color = LightPastelPurple)
+            .background(color = if (isSystemInDarkTheme()) DarkPastelPurple else LightPastelPurple)
             .padding(horizontal = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,

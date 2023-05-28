@@ -282,7 +282,7 @@ private fun NewsElement(news: News) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(brush = SolidColor(Color.White), shape = RoundedCornerShape(8.dp), alpha = 0.85f)
+                    .background(brush = SolidColor(MaterialTheme.colorScheme.surface), shape = RoundedCornerShape(8.dp), alpha = 0.85f)
                     .padding(vertical = 4.dp, horizontal = 8.dp)
             ) {
 
@@ -300,7 +300,7 @@ private fun NewsElement(news: News) {
                 Spacer(modifier = Modifier.height(16.dp))
                 Box(
                     modifier = Modifier
-                        .background(brush = SolidColor(Color.White), shape = RoundedCornerShape(8.dp), alpha = 0.9f)
+                        .background(brush = SolidColor(MaterialTheme.colorScheme.surface), shape = RoundedCornerShape(8.dp), alpha = 0.9f)
                         .padding(vertical = 4.dp, horizontal = 8.dp)
                 ) {
 
@@ -363,7 +363,7 @@ private fun FilteredNewsElement(news: BaseNews) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(brush = SolidColor(Color.White), shape = RoundedCornerShape(8.dp), alpha = 0.85f)
+                    .background(brush = SolidColor(MaterialTheme.colorScheme.surface), shape = RoundedCornerShape(8.dp), alpha = 0.85f)
                     .padding(vertical = 4.dp, horizontal = 8.dp)
             ) {
 
