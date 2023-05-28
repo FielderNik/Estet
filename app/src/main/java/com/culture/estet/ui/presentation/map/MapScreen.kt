@@ -1,7 +1,6 @@
 package com.culture.estet.ui.presentation.map
 
 import android.content.Context
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -46,6 +45,7 @@ import com.culture.estet.MainActivity
 import com.culture.estet.R
 import com.culture.estet.core.eventbus.BottomSheetEventBus
 import com.culture.estet.data.map.School
+import com.culture.estet.data.map.toPoint
 import com.culture.estet.ui.presentation.localcomposition.LocalAppTopBarState
 import com.culture.estet.ui.presentation.localcomposition.LocalBottomSheetEventBus
 import com.culture.estet.ui.theme.Grey
@@ -264,7 +264,7 @@ private fun setPoints(
 ) {
 
     points.forEach {
-        val placemark = collection.addPlacemark(it.point, imageProvider)
+        val placemark = collection.addPlacemark(it.geoPoint.toPoint(), imageProvider)
         val listener = MapObjectTapListener { _, _ ->
             bottomSheetEventBus.show {
                 Column(modifier = Modifier.padding(bottom = 16.dp)) {

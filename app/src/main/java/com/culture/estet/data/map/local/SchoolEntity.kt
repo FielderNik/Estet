@@ -4,9 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.culture.estet.core.generateId
+import com.culture.estet.data.map.GeoPoint
 import com.culture.estet.data.map.School
 import com.culture.estet.data.map.local.SchoolEntity.Companion.SCHOOLS_TABLE_NAME
-import com.yandex.mapkit.geometry.Point
 
 @Entity(tableName = SCHOOLS_TABLE_NAME)
 data class SchoolEntity(
@@ -15,7 +15,7 @@ data class SchoolEntity(
     val id: String = generateId(),
 
     @ColumnInfo(name = "point")
-    val point: Point,
+    val geoPoint: GeoPoint,
 
     @ColumnInfo(name = "information")
     val name: String,
@@ -32,7 +32,7 @@ data class SchoolEntity(
 fun SchoolEntity.toSchool(): School {
     return School(
         id = id,
-        point = point,
+        geoPoint = geoPoint,
         name = name,
         openingHours = openingHours
     )

@@ -1,16 +1,16 @@
 package com.culture.estet.data.map.remote
 
 import com.culture.estet.core.generateId
+import com.culture.estet.data.map.GeoPoint
 import com.culture.estet.data.map.School
 import com.culture.estet.data.map.local.SchoolEntity
 import com.google.gson.annotations.SerializedName
-import com.yandex.mapkit.geometry.Point
 import java.io.Serializable
 
 data class SchoolsResponse(
 
     @SerializedName("point")
-    val point: Point,
+    val geoPoint: GeoPoint,
 
     @SerializedName("name")
     val name: String,
@@ -22,7 +22,7 @@ data class SchoolsResponse(
 fun SchoolsResponse.toSchoolEntity(): SchoolEntity {
     return SchoolEntity(
         id = generateId(),
-        point = point,
+        geoPoint = geoPoint,
         name = name,
         openingHours = openingHours
     )
@@ -31,7 +31,7 @@ fun SchoolsResponse.toSchoolEntity(): SchoolEntity {
 fun SchoolsResponse.toSchool(): School {
     return School(
         id = generateId(),
-        point = point,
+        geoPoint = geoPoint,
         name = name,
         openingHours = openingHours
     )
