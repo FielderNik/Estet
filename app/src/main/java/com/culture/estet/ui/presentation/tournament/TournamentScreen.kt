@@ -6,13 +6,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -141,10 +140,10 @@ private fun UserItem(
             modifier = Modifier
                 .size(56.dp)
                 .clip(CircleShape),
-            model = ImageRequest.Builder(LocalContext.current).data("https://i.pravatar.cc/100?u=${user.id}").crossfade(true).build(),
+            model = ImageRequest.Builder(LocalContext.current).data(user.avatar).crossfade(true).build(),
             contentDescription = null,
             loading = {
-                CircularProgressIndicator()
+                CircularProgressIndicator(trackColor = Color.Gray, strokeCap = StrokeCap.Round)
             },
             error = {
                 Box(
