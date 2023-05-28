@@ -55,6 +55,7 @@ fun ProfileScreen(
     LaunchedEffect(Unit) {
         appTopBarState.title = title
         appTopBarState.isShowBackNavigate = true
+        appTopBarState.isShowProfile = false
         appState.shouldShowBottomBar.value = false
     }
     ProfileContent(state = state.value, viewModel::sendAction)
