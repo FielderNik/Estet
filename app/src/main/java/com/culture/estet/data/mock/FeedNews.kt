@@ -8,6 +8,8 @@ import com.culture.estet.domain.models.feed.NewsCategory
 
 object FeedNews {
 
+    private val IMAGE_SIZE = 100
+
     val news1 = News(
         id = generateId(),
         title = "Всероссийский фестиваль",
@@ -91,48 +93,50 @@ object FeedNews {
     val birthday1 = Birthday(
         id = birthdayId1,
         title = "85 лет со дня рождени Высоцкого",
-        imageUrl = "https://i.pravatar.cc/60?u=${birthdayId1}"
+        imageUrl = "https://i.pravatar.cc/${IMAGE_SIZE}?u=${birthdayId1}"
     )
 
     private val birthdayId2 = generateBirthdayId(2)
     val birthday2 = Birthday(
         id = birthdayId2,
         title = "школе искусств 50 лет",
-        imageUrl = "https://i.pravatar.cc/60?u=${birthdayId2}"
+        imageUrl = "https://i.pravatar.cc/${IMAGE_SIZE}?u=${birthdayId2}"
     )
 
     private val birthdayId3 = generateBirthdayId(3)
     val birthday3 = Birthday(
         id = birthdayId3,
         title = "Рахманинов.150 лет со дня рождения",
-        imageUrl = "https://i.pravatar.cc/60?u=${birthdayId3}"
+        imageUrl = "https://i.pravatar.cc/${IMAGE_SIZE}?u=${birthdayId3}"
     )
 
     private val birthdayId4 = generateBirthdayId(4)
     val birthday4 = Birthday(
         id = birthdayId4,
         title = "55 лет директору МШИ",
-        imageUrl = "https://i.pravatar.cc/60?u=${birthdayId4}"
+        imageUrl = "https://i.pravatar.cc/${IMAGE_SIZE}?u=${birthdayId4}"
     )
 
     private val birthdayId5 = generateBirthdayId(5)
     val birthday5 = Birthday(
         id = birthdayId5,
         title = "95 лет. Татьяна Пилецкая",
-        imageUrl = "https://i.pravatar.cc/60?u=${birthdayId5}"
+        imageUrl = "https://i.pravatar.cc/${IMAGE_SIZE}?u=${birthdayId5}"
     )
 
     private val birthdayId6 = generateBirthdayId(6)
     val birthday6 = Birthday(
         id = birthdayId6,
         title = "120 лет. Евгений Мравинский",
-        imageUrl = "https://i.pravatar.cc/60?u=${birthdayId6}"
+        imageUrl = "https://i.pravatar.cc/${IMAGE_SIZE}?u=${birthdayId6}"
     )
 
     private val birthdayId7 = generateBirthdayId(7)
     val birthday7 = Birthday(
         id = birthdayId7,
         title = "175 лет. Поль Гоген",
-        imageUrl = "https://i.pravatar.cc/60?u=${birthdayId7}"
+        imageUrl = "https://i.pravatar.cc/${IMAGE_SIZE}?u=${birthdayId7}"
     )
+
+
 }
