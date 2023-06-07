@@ -159,10 +159,6 @@ private fun Information(
             user.age.toString()
         )
         Spacer(modifier = Modifier.height(12.dp))
-        InfoBlock(
-            context.getString(R.string.gender),
-            user.gender
-        )
         Spacer(modifier = Modifier.height(12.dp))
         InfoBlock(
             context.getString(R.string.phone),
@@ -181,11 +177,11 @@ private fun Information(
 @Composable
 private fun InfoBlock(
     title: String,
-    info: String
+    info: String?
 ) {
     Text(text = title)
     Text(
-        text = info,
+        text = info ?: stringResource(id = R.string.label_not_filled),
         modifier = Modifier
             .fillMaxWidth()
             .background(if (isSystemInDarkTheme()) DarkPastelPurple else PurpleWhite80, shape = RoundedCornerShape(8.dp))

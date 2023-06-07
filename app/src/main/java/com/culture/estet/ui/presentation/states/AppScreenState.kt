@@ -32,7 +32,7 @@ class AppScreenState(
     val currentDestination: NavDestination?
         @Composable get() = navController.currentBackStackEntryAsState().value?.destination
 
-    var shouldShowBottomBar: MutableState<Boolean> = mutableStateOf(true)
+    var shouldShowBottomBar: MutableState<Boolean> = mutableStateOf(false)
     val topLevelDestinations: List<TopLevelDestination> = TopLevelDestination.values().asList()
 
     fun navigateToTopLevelDestination(topLevelDestination: TopLevelDestination) {

@@ -30,11 +30,8 @@ object Profile {
             id = userId,
             name = "Елена Зорина",
             avatar = "https://i.pravatar.cc/100?u=${userId}",
-            totalScore = artScoresUser.sumOf { it.score },
-            scoreArts = artScoresUser,
             phone = "+7(905)-823-33-22",
             age = 18,
-            gender = "Жен",
             email = "katerina421@mail.ru"
         )
     }
