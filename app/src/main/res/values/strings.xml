@@ -63,6 +63,7 @@
     <string name="label_feed_category_seminars">Семинары</string>
     <string name="label_feed_category_interview">Интервью</string>
     <string name="label_feed_category_grants">Гранты</string>
+    <string name="label_not_filled">Не заполнено</string>
 
 
     <string name="dialog_close_task_title">Закрыть задание</string>
