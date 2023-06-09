@@ -2,7 +2,7 @@ package com.culture.estet.ui.presentation.tasks.tasklevel
 
 import com.culture.estet.core.funcional.onFailure
 import com.culture.estet.core.funcional.onSuccess
-import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.ArtType
 import com.culture.estet.domain.repository.TaskRepository
 import com.culture.estet.ui.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -38,7 +38,7 @@ class TaskLevelViewModel @Inject constructor(
         }
     }
 
-    private suspend fun loadLevelData(userId: String, artType: TaskArtType) {
+    private suspend fun loadLevelData(userId: String, artType: ArtType) {
         withIo {
             taskRepository.getLevelData(userId = userId, artType = artType)
         }

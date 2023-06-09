@@ -2,6 +2,7 @@ package com.culture.estet.di
 
 import com.culture.estet.BuildConfig
 import com.culture.estet.core.network.EstetApi
+import com.culture.estet.data.map.remote.SchoolsApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,5 +44,10 @@ object RemoteModule {
     @Singleton
     fun provideEstetApi(retrofit: Retrofit): EstetApi {
         return retrofit.create(EstetApi::class.java)
+    }
+    @Provides
+    @Singleton
+    fun provideSchoolApi(retrofit: Retrofit): SchoolsApi {
+        return retrofit.create(SchoolsApi::class.java)
     }
 }

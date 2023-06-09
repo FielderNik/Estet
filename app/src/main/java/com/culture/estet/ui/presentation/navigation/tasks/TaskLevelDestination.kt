@@ -6,8 +6,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.culture.estet.domain.models.tasks.NavTasksArtType
-import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.NavTasksArtType
+import com.culture.estet.domain.models.ArtType
 import com.culture.estet.ui.presentation.navigation.AppNavigationDestination
 import com.culture.estet.ui.presentation.tasks.tasklevel.TaskLevelScreen
 
@@ -18,7 +18,7 @@ object TaskLevelDestination : AppNavigationDestination {
 
     override val destination: String = "task_level_destination"
 
-    fun navigationRoute(userId: String, artType: TaskArtType): String {
+    fun navigationRoute(userId: String, artType: ArtType): String {
         val encodedUserId = Uri.encode(userId)
         return "task_level_route?$USER_ID_ARG=$encodedUserId&$ART_TYPE_ARG=${artType.name}"
     }
@@ -28,8 +28,8 @@ object TaskLevelDestination : AppNavigationDestination {
         return Uri.decode(encodedId)
     }
 
-    fun artType(entry: NavBackStackEntry): TaskArtType {
-        return entry.arguments?.getSerializable(ART_TYPE_ARG) as TaskArtType
+    fun artType(entry: NavBackStackEntry): ArtType {
+        return entry.arguments?.getSerializable(ART_TYPE_ARG) as ArtType
     }
 
 }

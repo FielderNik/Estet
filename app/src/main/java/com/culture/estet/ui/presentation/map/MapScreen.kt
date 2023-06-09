@@ -121,19 +121,20 @@ private fun MapScreenContent(
                     null
                 )
                 activity.mapObjects = view.map.mapObjects.addCollection()
-                val imageProvider = ImageProvider.fromResource(context, R.drawable.school_point)
+                view.setViewTreeLifecycleOwner(lifecycleOwner)
+                view
+            },
+            update = {
+                val context = it.context
                 if (state is MapScreenState.Available) {
                     setPoints(
                         context,
-                        view.map.mapObjects.addCollection(),
-                        imageProvider,
+                        activity.mapObjects,
                         state.schools,
                         bottomSheetEventBus,
                         activity.pointListener
                     )
                 }
-                view.setViewTreeLifecycleOwner(lifecycleOwner)
-                view
             }
         )
 
@@ -196,7 +197,10 @@ private fun PlusButton() {
         modifier = Modifier
             .clip(RoundedCornerShape(MaterialTheme.shapes.large.topStart))
             .size(56.dp)
-            .background(if (isSystemInDarkTheme()) Color.DarkGray else Color.White, MaterialTheme.shapes.large)
+            .background(
+                if (isSystemInDarkTheme()) Color.DarkGray else Color.White,
+                MaterialTheme.shapes.large
+            )
             .border(1.dp, Color.Black, MaterialTheme.shapes.large)
             .shadow(8.dp, MaterialTheme.shapes.large),
         onClick = {
@@ -257,14 +261,16 @@ private fun MinusButton() {
 
 private fun setPoints(
     context: Context,
-    collection: MapObjectCollection,
-    imageProvider: ImageProvider,
+    collection: MapObjectCollection?,
     points: List<School>,
     bottomSheetEventBus: BottomSheetEventBus,
     pointsListeners: MutableList<MapObjectTapListener>
 ) {
-
+    if (collection == null) {
+        return
+    }
     points.forEach {
+        val imageProvider = ImageProvider.fromResource(context, it.artType.pointSchoolSource())
         val placemark = collection.addPlacemark(it.geoPoint.toPoint(), imageProvider)
         val listener = MapObjectTapListener { _, _ ->
             bottomSheetEventBus.show {

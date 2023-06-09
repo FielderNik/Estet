@@ -31,7 +31,7 @@ import com.culture.estet.R
 import com.culture.estet.core.utils.scoreText
 import com.culture.estet.domain.models.questions.Answer
 import com.culture.estet.domain.models.questions.Question
-import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.ArtType
 import com.culture.estet.domain.models.tasks.TaskLevelType
 import com.culture.estet.ui.presentation.elements.ArtImage
 import com.culture.estet.ui.presentation.elements.dialogs.ConfirmExitDialog
@@ -52,7 +52,7 @@ import com.culture.estet.ui.theme.Purple500
 @Composable
 fun QuestionsScreen(
     userId: String,
-    artType: TaskArtType,
+    artType: ArtType,
     levelType: TaskLevelType,
     viewModel: QuestionsViewModel = hiltViewModel()
 ) {
@@ -98,7 +98,7 @@ fun QuestionsScreen(
 
 @Composable
 private fun StepContent(
-    artType: TaskArtType,
+    artType: ArtType,
     step: Step?,
     sendAction: (QuestionsAction) -> Unit,
 ) {
@@ -118,7 +118,7 @@ private fun StepContent(
 
 @Composable
 private fun StepData(
-    artType: TaskArtType,
+    artType: ArtType,
     step: Step,
     sendAction: (QuestionsAction) -> Unit,
 ) {
@@ -226,7 +226,7 @@ private fun AnswerBlock(
 
 @Composable
 private fun QuestionBlock(
-    artType: TaskArtType,
+    artType: ArtType,
     question: String,
 ) {
     Row(modifier = Modifier.fillMaxWidth()) {
@@ -392,7 +392,7 @@ private fun AnswerBottomBlock(
 
 @Composable
 private fun ColumnScope.FinalScreen(
-    artType: TaskArtType,
+    artType: ArtType,
     step: Step,
     sendAction: (QuestionsAction) -> Unit,
 ) {

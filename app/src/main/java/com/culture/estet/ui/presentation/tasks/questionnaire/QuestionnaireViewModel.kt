@@ -1,6 +1,6 @@
 package com.culture.estet.ui.presentation.tasks.questionnaire
 
-import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.ArtType
 import com.culture.estet.domain.models.tasks.TaskGoalType
 import com.culture.estet.domain.models.tasks.TaskLevelType
 import com.culture.estet.ui.presentation.base.BaseViewModel
@@ -68,7 +68,7 @@ class QuestionnaireViewModel @Inject constructor(
         checkCanStart(updatedState)
     }
 
-    private suspend fun updateSelectedArts(currentState: QuestionnaireScreenState, artType: TaskArtType) {
+    private suspend fun updateSelectedArts(currentState: QuestionnaireScreenState, artType: ArtType) {
         val updatedState = currentState.copy(art = artType)
         checkCanStart(updatedState)
     }
