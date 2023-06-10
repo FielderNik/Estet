@@ -7,10 +7,16 @@ import androidx.navigation.NavType
 import com.culture.estet.R
 import com.culture.estet.domain.models.ArtType
 
-enum class TaskLevelType {
-    BEGINNER,
-    ADVANCED,
-    EXPERT;
+enum class TaskLevelType(val id: Int) {
+    BEGINNER(0),
+    ADVANCED(1),
+    EXPERT(2);
+
+    companion object {
+        fun getById(id: Int): TaskLevelType {
+            return values().find { it.id == id } ?: BEGINNER
+        }
+    }
 
     @DrawableRes
     fun iconSource(): Int {

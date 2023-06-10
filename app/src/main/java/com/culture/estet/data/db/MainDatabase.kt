@@ -22,7 +22,7 @@ import com.culture.estet.data.tasks.statistics.local.StatisticsEntity
         QuestionEntity::class,
         AnswerEntity::class,
         StatisticsEntity::class,
-    ], version = 3
+    ], version = 4
 )
 @TypeConverters(PointConverter::class)
 abstract class MainDatabase : RoomDatabase() {

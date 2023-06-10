@@ -11,6 +11,7 @@ import com.culture.estet.data.tasks.statistics.local.StatisticsEntity
 import com.culture.estet.domain.models.ArtType
 import com.culture.estet.domain.models.tasks.TaskCategory
 import com.culture.estet.domain.models.tasks.TaskLevel
+import com.culture.estet.domain.models.tasks.TaskLevelType
 import javax.inject.Inject
 
 interface TaskRepository {
@@ -33,8 +34,29 @@ class TaskRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getLevelData(userId: String, artType: ArtType): Either<Failure, List<TaskLevel>> {
-        return handleRequest {
-            Tasks.Level.allLevels.filter { it.artType == artType }
+
+        return questionRepository.getQuestionsByArtType(artType).flatMap { questions ->
+            statisticsRepository.getAllStatistics(userId).flatMap { statistics ->
+                TaskLevelType.values().map {  levelType ->
+                    TaskLevel(
+                        artType = artType,
+                        taskLevelType = levelType,
+                        amountQuestions = questions.filter { it.level == levelType.id }.size,
+                        completedQuestions = getCompletedQuestionsByLevel(questions, statistics, levelType).size
+                    )
+                }.toRight()
+            }
+        }
+
+    }
+
+    private fun getCompletedQuestionsByLevel(
+        questions: List<QuestionEntity>,
+        statistics: List<StatisticsEntity>,
+        levelType: TaskLevelType
+    ): List<QuestionEntity> {
+        return questions.filter { question ->
+            statistics.any { it.questionId ==  question.id} && question.level == levelType.id
         }
     }
 
@@ -60,6 +82,5 @@ class QuestionsStatisticsToTaskCategoriesMapper {
         return questions.filter { question ->
             statistics.any { it.questionId ==  question.id}
         }
-
     }
 }

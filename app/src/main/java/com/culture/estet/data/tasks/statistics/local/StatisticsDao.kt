@@ -12,4 +12,7 @@ interface StatisticsDao {
 
     @Upsert
     suspend fun upsertAllStatistics(statistics: List<StatisticsEntity>)
+
+    @Upsert
+    suspend fun upsertStatistics(statistics: StatisticsEntity)
 }
