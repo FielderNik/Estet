@@ -2,6 +2,9 @@ package com.culture.estet.ui.presentation.initial
 
 import com.culture.estet.core.funcional.onFailure
 import com.culture.estet.core.funcional.onSuccess
+import com.culture.estet.domain.repository.AnswerRepository
+import com.culture.estet.domain.repository.QuestionRepository
+import com.culture.estet.domain.repository.StatisticsRepository
 import com.culture.estet.domain.repository.UserRepository
 import com.culture.estet.domain.repository.settings.AppSettingsRepository
 import com.culture.estet.ui.presentation.base.BaseViewModel
@@ -13,6 +16,9 @@ import javax.inject.Inject
 class InitialViewModel @Inject constructor(
     private val appSettingsRepository: AppSettingsRepository,
     private val userRepository: UserRepository,
+    private val questionRepository: QuestionRepository,
+    private val answerRepository: AnswerRepository,
+    private val statisticsRepository: StatisticsRepository,
 ) : BaseViewModel<InitialScreenState, InitialEffect, InitialAction>(InitialScreenState) {
 
     override fun sendAction(action: InitialAction) {
@@ -30,6 +36,9 @@ class InitialViewModel @Inject constructor(
                 createUser(isLocal)
             } else {
                 loadUserData(userId)
+                loadQuestions()
+                loadAnswers()
+                loadStatistics(userId)
             }
         }
     }
@@ -73,6 +82,67 @@ class InitialViewModel @Inject constructor(
             }
         sendEffect(InitialEffect.Loaded)
 
+    }
+
+    private suspend fun loadQuestions() {
+        questionRepository.updateAllQuestions()
+            .onFailure {
+
+            }
+            .onSuccess {
+                 getAllQuestions()
+            }
+    }
+
+    private suspend fun getAllQuestions() {
+        questionRepository.getAllQuestions()
+            .onFailure {
+
+            }
+            .onSuccess {
+
+            }
+    }
+    
+    private suspend fun loadAnswers() {
+        answerRepository.updateAnswers()
+            .onFailure {
+
+            }
+            .onSuccess { 
+                getAllAnswers()
+            }
+    }
+    
+    private suspend fun getAllAnswers() {
+        answerRepository.getAllAnswers()
+            .onFailure {
+
+            }
+            .onSuccess {
+
+            }
+    }
+
+    private suspend fun loadStatistics(userId: String) {
+        statisticsRepository.updateStatistics(userId)
+            .onFailure {
+
+            }
+            .onSuccess {
+                getStatistics(userId)
+
+            }
+    }
+
+    private suspend fun getStatistics(userId: String) {
+        statisticsRepository.getAllStatistics(userId)
+            .onFailure {
+
+            }
+            .onSuccess {
+
+            }
     }
 
 

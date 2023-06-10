@@ -7,6 +7,7 @@ import com.culture.estet.core.generateId
 import com.culture.estet.domain.models.ArtType
 import com.culture.estet.domain.models.tasks.TaskLevelType
 import com.culture.estet.domain.repository.TaskRepository
+import com.culture.estet.domain.repository.settings.AppSettingsRepository
 import com.culture.estet.ui.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -14,6 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TasksViewModel @Inject constructor(
     private val taskRepository: TaskRepository,
+    private val appSettingsRepository: AppSettingsRepository,
 ) : BaseViewModel<TasksScreenState, TasksEffect, TasksAction>(TasksScreenState.Loading) {
 
     override fun sendAction(action: TasksAction) {
@@ -53,22 +55,25 @@ class TasksViewModel @Inject constructor(
     }
 
     private suspend fun loadTasks() {
-        val user = getCurrentUser()
-        withIo {
-            taskRepository.getTaskCategoriesByUserId(user)
+        val userId = getCurrentUserId()
+        if (userId != null) {
+
+            withIo {
+                taskRepository.getTaskCategoriesByUserId(userId)
+            }
+                .onFailure {
+                    //todo
+                }
+                .onSuccess { taskCategories ->
+                    val sortedTaskCategories = taskCategories.sortedBy { it.ordinal }
+                    setState(TasksScreenState.TasksInProgress(userId = userId, tasks = sortedTaskCategories))
+                }
         }
-            .onFailure {
-                //todo
-            }
-            .onSuccess { taskCategories ->
-                val sortedTaskCategories = taskCategories.sortedBy { it.ordinal }
-                setState(TasksScreenState.TasksInProgress(userId = user, tasks = sortedTaskCategories))
-            }
     }
 
 
-    private suspend fun getCurrentUser(): String {
-        return "user_id_1"
+    private suspend fun getCurrentUserId(): String? {
+        return appSettingsRepository.getUserId()
     }
 
 }
