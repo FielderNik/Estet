@@ -34,6 +34,7 @@ class InitialViewModel @Inject constructor(
             val userId = appSettingsRepository.getUserId()
             if (userId.isNullOrEmpty()) {
                 createUser(isLocal)
+
             } else {
                 loadUserData(userId)
                 loadQuestions()
@@ -59,6 +60,10 @@ class InitialViewModel @Inject constructor(
                 }
                 .onSuccess {
                     saveUserToLocal(it)
+                    loadUserData(it)
+                    loadQuestions()
+                    loadAnswers()
+                    loadStatistics(it)
                 }
         }
     }
@@ -87,9 +92,9 @@ class InitialViewModel @Inject constructor(
     private suspend fun loadQuestions() {
         questionRepository.updateAllQuestions()
             .onFailure {
-
             }
             .onSuccess {
+                
                  getAllQuestions()
             }
     }
@@ -97,10 +102,8 @@ class InitialViewModel @Inject constructor(
     private suspend fun getAllQuestions() {
         questionRepository.getAllQuestions()
             .onFailure {
-
             }
             .onSuccess {
-
             }
     }
     

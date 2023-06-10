@@ -12,4 +12,7 @@ interface AnswerDao {
 
     @Upsert
     suspend fun upsertAllAnswers(answers: List<AnswerEntity>)
+
+    @Query("SELECT * FROM answers WHERE question_id = :questionId")
+    suspend fun getAllByQuestionId(questionId: String): List<AnswerEntity>
 }

@@ -14,5 +14,11 @@ interface QuestionDao {
     @Upsert
     suspend fun upsertAllQuestions(questions: List<QuestionEntity>)
 
+    @Query("SELECT * FROM questions WHERE art_type = :artType")
+    suspend fun getAllByArtType(artType: Int): List<QuestionEntity>
+
+    @Query("SELECT * FROM questions WHERE art_type = :artType AND level = :level")
+    suspend fun getAllByParameters(artType: Int, level: Int): List<QuestionEntity>
+
 
 }

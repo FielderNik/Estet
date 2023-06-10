@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.culture.estet.data.tasks.answers.local.AnswerEntity.Companion.ANSWERS_TABLE_NAME
+import com.culture.estet.domain.models.questions.Answer
 
 
 @Entity(tableName = ANSWERS_TABLE_NAME)
@@ -25,3 +26,12 @@ data class AnswerEntity(
         const val ANSWERS_TABLE_NAME = "answers"
     }
 }
+
+
+fun AnswerEntity.toUiModel() : Answer {
+    return Answer(
+        id = id, answer = answer, isCorrect = isCorrect
+    )
+}
+
+fun List<AnswerEntity>.toAnswerUiModelList() = map(AnswerEntity::toUiModel)

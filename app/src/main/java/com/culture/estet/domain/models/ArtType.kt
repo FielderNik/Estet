@@ -8,11 +8,11 @@ import androidx.navigation.NavType
 import com.culture.estet.R
 import com.culture.estet.ui.theme.*
 
-enum class ArtType {
-    MUSIC,
-    DANCE,
-    THEATRE,
-    PAINTING;
+enum class ArtType(val id: Int) {
+    MUSIC(1),
+    DANCE(2),
+    THEATRE(3),
+    PAINTING(4);
 
     @DrawableRes
     fun painterSource(): Int {
@@ -55,7 +55,8 @@ enum class ArtType {
 
     companion object {
         fun getById(id: Int): ArtType {
-            return ArtType.values()[id % ArtType.values().size]
+//            return ArtType.values()[id % ArtType.values().size]
+            return ArtType.values().find { it.id == id } ?: ArtType.DANCE
         }
     }
 }

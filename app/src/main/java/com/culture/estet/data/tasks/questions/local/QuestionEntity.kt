@@ -24,6 +24,9 @@ data class QuestionEntity(
     @ColumnInfo(name = "score")
     val score: Int,
 
+    @ColumnInfo(name = "description")
+    val description: String,
+
 ) {
     companion object {
         const val QUESTIONS_TABLE_NAME = "questions"

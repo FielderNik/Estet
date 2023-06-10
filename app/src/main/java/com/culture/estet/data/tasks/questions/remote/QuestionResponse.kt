@@ -9,6 +9,7 @@ data class QuestionResponse(
     val level: Int,
     val artType: Int,
     val score: Int,
+    val description: String,
 ): Serializable
 
 
@@ -20,6 +21,7 @@ fun QuestionResponse.toQuestionEntity(): QuestionEntity {
         level = level,
         artType = artType,
         score = score,
+        description = description
     )
 }
 

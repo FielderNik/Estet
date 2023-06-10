@@ -15,7 +15,8 @@ class UserRepositoryImpl @Inject constructor(private val api: EstetApi) : BaseRe
 
     override suspend fun createUser(): Either<Failure, String> {
         return handleSuspendRequest {
-            api.createEmptyUser()
+            val response = api.createEmptyUser()
+            response.id
         }
     }
 
@@ -26,3 +27,8 @@ class UserRepositoryImpl @Inject constructor(private val api: EstetApi) : BaseRe
     }
 
 }
+
+
+data class UserResponse(
+    val id: String
+)

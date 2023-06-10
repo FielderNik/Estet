@@ -136,7 +136,13 @@ private fun TaskCategoryContent(
 ) {
     val navigator = LocalAppScreenState.current.navController
     val progress by remember {
-        mutableStateOf(taskCategory.completedLevels.toFloat() / taskCategory.amountLevels.toFloat() )
+        mutableStateOf(
+            if (taskCategory.amountLevels == 0) {
+                0f
+            } else {
+                taskCategory.completedLevels.toFloat() / taskCategory.amountLevels.toFloat()
+            }
+        )
     }
     Column(
         modifier = Modifier

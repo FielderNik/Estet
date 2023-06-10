@@ -11,6 +11,7 @@ import javax.inject.Inject
 interface StatisticsRepository {
     suspend fun updateStatistics(userId: String): Either<Failure, None>
     suspend fun getAllStatistics(userId: String): Either<Failure, List<StatisticsEntity>>
+    suspend fun saveStatistics(userId: String, questionId: String, selectedAnswerId: String): Either<Failure, None>
 }
 
 class StatisticsRepositoryImpl @Inject constructor(
@@ -30,6 +31,30 @@ class StatisticsRepositoryImpl @Inject constructor(
         return handleSuspendRequest {
             statisticsDao.getAllByUserId(userId)
         }
+    }
+
+    override suspend fun saveStatistics(userId: String, questionId: String, selectedAnswerId: String): Either<Failure, None> {
+        return handleSuspendRequest {
+             val response = statisticsRemoteDataSource.saveStatistics(
+                userId = userId,
+                questionId = questionId,
+                selectedAnswerId = selectedAnswerId
+            )
+            if (response != null) {
+                statisticsDao.upsertStatistics(
+                    StatisticsEntity(
+                        id = response,
+                        userId = userId,
+                        questionId = questionId,
+                        selectedAnswerId = selectedAnswerId
+                    )
+                )
+                None
+            } else {
+                throw Exception("statistics not saves")
+            }
+        }
+
     }
 
 }
