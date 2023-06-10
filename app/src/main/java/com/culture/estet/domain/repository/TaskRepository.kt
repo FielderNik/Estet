@@ -8,7 +8,7 @@ import com.culture.estet.core.generateId
 import com.culture.estet.data.mock.Tasks
 import com.culture.estet.data.tasks.questions.local.QuestionEntity
 import com.culture.estet.data.tasks.statistics.local.StatisticsEntity
-import com.culture.estet.domain.models.tasks.ArtType
+import com.culture.estet.domain.models.ArtType
 import com.culture.estet.domain.models.tasks.TaskCategory
 import com.culture.estet.domain.models.tasks.TaskLevel
 import javax.inject.Inject
@@ -42,7 +42,7 @@ class TaskRepositoryImpl @Inject constructor(
 
 class QuestionsStatisticsToTaskCategoriesMapper {
     fun map(questions: List<QuestionEntity>, statistics: List<StatisticsEntity>): List<TaskCategory> {
-        return TaskArtType.values().map {
+        return ArtType.values().map {
 
             TaskCategory(
                 id = generateId(),

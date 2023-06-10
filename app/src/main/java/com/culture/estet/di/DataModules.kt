@@ -4,6 +4,7 @@ import com.culture.estet.core.network.EstetApi
 import com.culture.estet.data.feed.remote.NewsRemoteDataSource
 import com.culture.estet.data.feed.remote.RetrofitNewsRemoteDataSource
 import com.culture.estet.data.map.remote.RetrofitSchoolsRemoteDataSource
+import com.culture.estet.data.map.remote.SchoolsApi
 import com.culture.estet.data.map.remote.SchoolsRemoteDataSource
 import com.culture.estet.data.tasks.answers.remote.AnswerRemoteDataSource
 import com.culture.estet.data.tasks.answers.remote.AnswerRemoteDataSourceImpl
@@ -28,7 +29,7 @@ object DataSourceModule {
     }
     @Provides
     @Singleton
-    fun provideSchoolsNetworkDataSource(api: EstetApi): SchoolsRemoteDataSource {
+    fun provideSchoolsNetworkDataSource(api: SchoolsApi): SchoolsRemoteDataSource {
         return RetrofitSchoolsRemoteDataSource(api)
     }
 
