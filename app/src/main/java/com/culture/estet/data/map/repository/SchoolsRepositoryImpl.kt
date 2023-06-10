@@ -16,7 +16,6 @@ import javax.inject.Singleton
 
 @Singleton
 class SchoolsRepositoryImpl @Inject constructor(
-    private val localDataSource: SchoolsDao,
     private val remoteDataSource: SchoolsRemoteDataSource,
 ): BaseRepository(), SchoolsRepository {
     override suspend fun getSchoolsList(): List<School> {
@@ -26,20 +25,11 @@ class SchoolsRepositoryImpl @Inject constructor(
         var data: List<School> = emptyList()
         response.onSuccess {
             data = it.toSchoolsList()
-            saveSchools(it)
-        }
-        response.onFailure {
-            val dbSchools = localDataSource.getAll()
-            dbSchools?.let { data = it.toSchoolsList() }
         }
         return data
     }
 
     override suspend fun getSchool(): School {
         return getMockSchools()[0]
-    }
-
-    private suspend fun saveSchools(schoolsResponse: List<SchoolResponse>) {
-        localDataSource.upsertAllSchools(schoolsResponse.toSchoolsListEntity())
     }
 }
