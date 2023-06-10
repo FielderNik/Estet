@@ -1,6 +1,6 @@
 # 📄Документация
 
-Ссылка на apk-файл: [https://disk.yandex.ru/d/v31jW9kKawbwcA](https://disk.yandex.ru/d/-UNrGc1HPoXosQ)
+Ссылка на apk-файл: https://disk.yandex.ru/d/-UNrGc1HPoXosQ
 
 Репозиторий сервера: https://github.com/FielderNik/estet_server
 
