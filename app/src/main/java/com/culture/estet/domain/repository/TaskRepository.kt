@@ -2,7 +2,12 @@ package com.culture.estet.domain.repository
 
 import com.culture.estet.core.funcional.Either
 import com.culture.estet.core.funcional.Failure
+import com.culture.estet.core.funcional.flatMap
+import com.culture.estet.core.funcional.toRight
+import com.culture.estet.core.generateId
 import com.culture.estet.data.mock.Tasks
+import com.culture.estet.data.tasks.questions.local.QuestionEntity
+import com.culture.estet.data.tasks.statistics.local.StatisticsEntity
 import com.culture.estet.domain.models.tasks.TaskArtType
 import com.culture.estet.domain.models.tasks.TaskCategory
 import com.culture.estet.domain.models.tasks.TaskLevel
@@ -14,11 +19,16 @@ interface TaskRepository {
 }
 
 
-class TaskRepositoryImpl @Inject constructor() : TaskRepository, BaseRepository() {
+class TaskRepositoryImpl @Inject constructor(
+    private val questionRepository: QuestionRepository,
+    private val statisticsRepository: StatisticsRepository,
+) : TaskRepository, BaseRepository() {
 
     override suspend fun getTaskCategoriesByUserId(userId: String): Either<Failure, List<TaskCategory>> {
-        return handleRequest {
-            Tasks.TasksCategory.taskCategories
+        return questionRepository.getAllQuestions().flatMap { questions ->
+            statisticsRepository.getAllStatistics(userId).flatMap { statistics ->
+                QuestionsStatisticsToTaskCategoriesMapper().map(questions, statistics).toRight()
+            }
         }
     }
 
@@ -28,4 +38,28 @@ class TaskRepositoryImpl @Inject constructor() : TaskRepository, BaseRepository(
         }
     }
 
+}
+
+class QuestionsStatisticsToTaskCategoriesMapper {
+    fun map(questions: List<QuestionEntity>, statistics: List<StatisticsEntity>): List<TaskCategory> {
+        return TaskArtType.values().map {
+
+            TaskCategory(
+                id = generateId(),
+                type = it,
+                amountLevels = questions.size,
+                completedLevels = getCompletedQuestions(questions, statistics).size,
+                ordinal = it.ordinal,
+                amountArtScore = 0
+            )
+        }
+
+    }
+
+    private fun getCompletedQuestions(questions: List<QuestionEntity>, statistics: List<StatisticsEntity>): List<QuestionEntity> {
+        return questions.filter { question ->
+            statistics.any { it.questionId ==  question.id}
+        }
+
+    }
 }

@@ -1,45 +1,52 @@
 package com.culture.estet.di
 
-import android.content.Context
-import com.culture.estet.data.db.MainDatabase
-import com.culture.estet.data.feed.local.NewsDao
+import com.culture.estet.core.network.EstetApi
 import com.culture.estet.data.feed.remote.NewsRemoteDataSource
 import com.culture.estet.data.feed.remote.RetrofitNewsRemoteDataSource
-import com.culture.estet.data.map.local.SchoolsDao
 import com.culture.estet.data.map.remote.RetrofitSchoolsRemoteDataSource
 import com.culture.estet.data.map.remote.SchoolsRemoteDataSource
-import com.culture.estet.domain.repository.settings.AppSettingsRepository
-import com.culture.estet.domain.repository.settings.AppSettingsRepositoryImpl
-import dagger.Binds
+import com.culture.estet.data.tasks.answers.remote.AnswerRemoteDataSource
+import com.culture.estet.data.tasks.answers.remote.AnswerRemoteDataSourceImpl
+import com.culture.estet.data.tasks.questions.remote.QuestionRemoteDataSource
+import com.culture.estet.data.tasks.questions.remote.QuestionRemoteDataSourceImpl
+import com.culture.estet.data.tasks.statistics.remote.StatisticsRemoteDataSource
+import com.culture.estet.data.tasks.statistics.remote.StatisticsRemoteDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface DataSourceModule {
-    @Binds
+object DataSourceModule {
+
+    @Provides
     @Singleton
-    fun bindNewsNetworkDataSource(dataSource: RetrofitNewsRemoteDataSource): NewsRemoteDataSource
-    @Binds
+    fun provideNewsNetworkDataSource(api: EstetApi): NewsRemoteDataSource {
+        return RetrofitNewsRemoteDataSource(api)
+    }
+    @Provides
     @Singleton
-    fun bindSchoolsNetworkDataSource(dataSource: RetrofitSchoolsRemoteDataSource): SchoolsRemoteDataSource
-}
-
-@Module
-@InstallIn(SingletonComponent::class)
-object DatabaseModule {
+    fun provideSchoolsNetworkDataSource(api: EstetApi): SchoolsRemoteDataSource {
+        return RetrofitSchoolsRemoteDataSource(api)
+    }
 
     @Provides
-    fun provideNewsDao(@ApplicationContext context: Context): NewsDao = MainDatabase.getInstance(context).newsDao()
-    @Provides
-    fun provideSchoolDao(@ApplicationContext context: Context): SchoolsDao = MainDatabase.getInstance(context).schoolsDao()
+    @Singleton
+    fun provideQuestionsNetworkDataSource(api: EstetApi): QuestionRemoteDataSource {
+        return QuestionRemoteDataSourceImpl(api)
+    }
 
     @Provides
-    fun provideAppSettingsRepository(@ApplicationContext context: Context): AppSettingsRepository {
-        return AppSettingsRepositoryImpl(context)
+    @Singleton
+    fun provideAnswerNetworkDataSource(api: EstetApi): AnswerRemoteDataSource {
+        return AnswerRemoteDataSourceImpl(api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideStatisticsNetworkDataSource(api: EstetApi): StatisticsRemoteDataSource {
+        return StatisticsRemoteDataSourceImpl(api)
     }
 }
