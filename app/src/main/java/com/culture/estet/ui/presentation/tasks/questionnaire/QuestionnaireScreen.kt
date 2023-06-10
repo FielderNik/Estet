@@ -31,7 +31,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.NavHostController
 import com.culture.estet.R
-import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.ArtType
 import com.culture.estet.domain.models.tasks.TaskGoalType
 import com.culture.estet.domain.models.tasks.TaskLevelType
 import com.culture.estet.ui.presentation.localcomposition.LocalAppScreenState
@@ -144,7 +144,7 @@ private fun QuestionnaireScreenContent(
 
 @Composable
 private fun ArtType(
-    selectedArt: TaskArtType?,
+    selectedArt: ArtType?,
     sendAction: (QuestionnaireAction) -> Unit,
 ) {
     Column(
@@ -170,19 +170,19 @@ private fun ArtType(
             ArtTypeItem(
                 title = stringResource(id = R.string.title_questionnaire_choice_art_theatre),
                 iconId = R.drawable.image_theatre,
-                isSelected = selectedArt == TaskArtType.THEATRE,
+                isSelected = selectedArt == ArtType.THEATRE,
                 selectableRole = Role.RadioButton,
                 onClick = {
-                    sendAction(QuestionnaireAction.SelectArtType(TaskArtType.THEATRE))
+                    sendAction(QuestionnaireAction.SelectArtType(ArtType.THEATRE))
                 }
             )
             ArtTypeItem(
                 title = stringResource(id = R.string.title_questionnaire_choice_art_music),
                 iconId = R.drawable.image_music,
-                isSelected = selectedArt == TaskArtType.MUSIC,
+                isSelected = selectedArt == ArtType.MUSIC,
                 selectableRole = Role.RadioButton,
                 onClick = {
-                    sendAction(QuestionnaireAction.SelectArtType(TaskArtType.MUSIC))
+                    sendAction(QuestionnaireAction.SelectArtType(ArtType.MUSIC))
                 }
             )
         }
@@ -195,19 +195,19 @@ private fun ArtType(
             ArtTypeItem(
                 title = stringResource(id = R.string.title_questionnaire_choice_art_dance),
                 iconId = R.drawable.image_dance,
-                isSelected = selectedArt == TaskArtType.DANCE,
+                isSelected = selectedArt == ArtType.DANCE,
                 selectableRole = Role.RadioButton,
                 onClick = {
-                    sendAction(QuestionnaireAction.SelectArtType(TaskArtType.DANCE))
+                    sendAction(QuestionnaireAction.SelectArtType(ArtType.DANCE))
                 }
             )
             ArtTypeItem(
                 title = stringResource(id = R.string.title_questionnaire_choice_art_painting),
                 iconId = R.drawable.image_painting,
-                isSelected = selectedArt == TaskArtType.PAINTING,
+                isSelected = selectedArt == ArtType.PAINTING,
                 selectableRole = Role.RadioButton,
                 onClick = {
-                    sendAction(QuestionnaireAction.SelectArtType(TaskArtType.PAINTING))
+                    sendAction(QuestionnaireAction.SelectArtType(ArtType.PAINTING))
                 }
             )
         }

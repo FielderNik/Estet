@@ -1,7 +1,7 @@
 package com.culture.estet.data.mock
 
 import com.culture.estet.domain.models.tasks.TaskCategory
-import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.ArtType
 import com.culture.estet.domain.models.tasks.TaskLevel
 import com.culture.estet.domain.models.tasks.TaskLevelType
 
@@ -10,7 +10,7 @@ object Tasks {
     object TasksCategory {
         private val music = TaskCategory(
             id = "music_id",
-            type = TaskArtType.MUSIC,
+            type = ArtType.MUSIC,
             amountLevels = 5,
             completedLevels = 3,
             amountArtScore = 10,
@@ -19,7 +19,7 @@ object Tasks {
 
         private val theatre = TaskCategory(
             id = "theatre_id",
-            type = TaskArtType.THEATRE,
+            type = ArtType.THEATRE,
             amountLevels = 5,
             completedLevels = 2,
             amountArtScore = 5,
@@ -28,7 +28,7 @@ object Tasks {
 
         private val dance = TaskCategory(
             id = "dance_id",
-            type = TaskArtType.DANCE,
+            type = ArtType.DANCE,
             amountLevels = 5,
             completedLevels = 0,
             amountArtScore = 0,
@@ -37,7 +37,7 @@ object Tasks {
 
         private val painting = TaskCategory(
             id = "painting_id",
-            type = TaskArtType.PAINTING,
+            type = ArtType.PAINTING,
             amountLevels = 5,
             completedLevels = 0,
             amountArtScore = 0,
@@ -52,84 +52,84 @@ object Tasks {
 
     object Level {
         private val easyTheatre = TaskLevel(
-            taskArtType = TaskArtType.THEATRE,
+            artType = ArtType.THEATRE,
             taskLevelType = TaskLevelType.BEGINNER,
             amountQuestions = 3,
             completedQuestions = 1,
         )
 
         private val advancedTheatre = TaskLevel(
-            taskArtType = TaskArtType.THEATRE,
+            artType = ArtType.THEATRE,
             taskLevelType = TaskLevelType.ADVANCED,
             amountQuestions = 3,
             completedQuestions = 0,
         )
 
         private val expertTheatre = TaskLevel(
-            taskArtType = TaskArtType.THEATRE,
+            artType = ArtType.THEATRE,
             taskLevelType = TaskLevelType.EXPERT,
             amountQuestions = 3,
             completedQuestions = 3,
         )
 
         private val easyDance = TaskLevel(
-            taskArtType = TaskArtType.DANCE,
+            artType = ArtType.DANCE,
             taskLevelType = TaskLevelType.BEGINNER,
             amountQuestions = 3,
             completedQuestions = 1,
         )
 
         private val advancedDance = TaskLevel(
-            taskArtType = TaskArtType.DANCE,
+            artType = ArtType.DANCE,
             taskLevelType = TaskLevelType.ADVANCED,
             amountQuestions = 3,
             completedQuestions = 0,
         )
 
         private val expertDance = TaskLevel(
-            taskArtType = TaskArtType.DANCE,
+            artType = ArtType.DANCE,
             taskLevelType = TaskLevelType.EXPERT,
             amountQuestions = 3,
             completedQuestions = 3,
         )
 
         private val easyPainting = TaskLevel(
-            taskArtType = TaskArtType.PAINTING,
+            artType = ArtType.PAINTING,
             taskLevelType = TaskLevelType.BEGINNER,
             amountQuestions = 3,
             completedQuestions = 1,
         )
 
         private val advancedPainting = TaskLevel(
-            taskArtType = TaskArtType.PAINTING,
+            artType = ArtType.PAINTING,
             taskLevelType = TaskLevelType.ADVANCED,
             amountQuestions = 3,
             completedQuestions = 0,
         )
 
         private val expertPainting = TaskLevel(
-            taskArtType = TaskArtType.PAINTING,
+            artType = ArtType.PAINTING,
             taskLevelType = TaskLevelType.EXPERT,
             amountQuestions = 3,
             completedQuestions = 3,
         )
 
         private val easyMusic = TaskLevel(
-            taskArtType = TaskArtType.MUSIC,
+            artType = ArtType.MUSIC,
             taskLevelType = TaskLevelType.BEGINNER,
             amountQuestions = 3,
             completedQuestions = 1,
         )
 
         private val advancedMusic = TaskLevel(
-            taskArtType = TaskArtType.MUSIC,
+            artType = ArtType.MUSIC,
             taskLevelType = TaskLevelType.ADVANCED,
             amountQuestions = 3,
             completedQuestions = 0,
         )
 
         private val expertMusic = TaskLevel(
-            taskArtType = TaskArtType.MUSIC,
+            artType = ArtType.MUSIC,
             taskLevelType = TaskLevelType.EXPERT,
             amountQuestions = 3,
             completedQuestions = 3,

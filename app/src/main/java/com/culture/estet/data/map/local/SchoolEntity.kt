@@ -9,6 +9,7 @@ import com.culture.estet.core.generateId
 import com.culture.estet.data.map.GeoPoint
 import com.culture.estet.data.map.School
 import com.culture.estet.data.map.local.SchoolEntity.Companion.SCHOOLS_TABLE_NAME
+import com.culture.estet.domain.models.ArtType
 import java.util.Arrays
 
 import java.util.stream.Collectors
@@ -18,7 +19,10 @@ import java.util.stream.Collectors
 data class SchoolEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: String = generateId(),
+    val id: String,
+
+    @ColumnInfo(name = "art_type")
+    val artType: String,
 
     @ColumnInfo(name = "point")
     @TypeConverters(PointConverter::class)
@@ -52,6 +56,7 @@ class PointConverter {
 fun SchoolEntity.toSchool(): School {
     return School(
         id = id,
+        artType = ArtType.valueOf(artType),
         geoPoint = geoPoint,
         name = name,
         openingHours = openingHours

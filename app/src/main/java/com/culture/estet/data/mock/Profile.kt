@@ -2,26 +2,26 @@ package com.culture.estet.data.mock
 
 import com.culture.estet.core.generateUserId
 import com.culture.estet.domain.models.profile.UserProfile
-import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.ArtType
 import com.culture.estet.domain.models.tournament.ArtScore
 
 object Profile {
 
     object User {
         private val musicScoreUser = ArtScore(
-            artType = TaskArtType.MUSIC,
+            artType = ArtType.MUSIC,
             score = 11
         )
         private val theatreScoreUser = ArtScore(
-            artType = TaskArtType.THEATRE,
+            artType = ArtType.THEATRE,
             score = 21
         )
         private val paintingScoreUser = ArtScore(
-            artType = TaskArtType.PAINTING,
+            artType = ArtType.PAINTING,
             score = 0
         )
         private val danceScoreUser = ArtScore(
-            artType = TaskArtType.DANCE,
+            artType = ArtType.DANCE,
             score = 0
         )
         private val artScoresUser = listOf(musicScoreUser, theatreScoreUser, paintingScoreUser, danceScoreUser)

@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.culture.estet.R
-import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.ArtType
 import com.culture.estet.domain.models.tasks.TaskLevel
 import com.culture.estet.ui.presentation.localcomposition.LocalAppScreenState
 import com.culture.estet.ui.presentation.localcomposition.LocalAppTopBarState
@@ -29,7 +29,7 @@ import com.culture.estet.ui.presentation.navigation.tasks.QuestionsDestination
 @Composable
 fun TaskLevelScreen(
     userId: String,
-    artType: TaskArtType,
+    artType: ArtType,
     viewModel: TaskLevelViewModel = hiltViewModel()
 ) {
     val appScreenState = LocalAppScreenState.current
@@ -103,7 +103,7 @@ private fun LevelItem(
             .clickable {
                 val route = QuestionsDestination.navigationRoute(
                     userId = userId,
-                    artType = level.taskArtType,
+                    artType = level.artType,
                     levelType = level.taskLevelType
                 )
                 navigator.navigate(route)
@@ -118,7 +118,7 @@ private fun LevelItem(
         ) {
             Image(
                 modifier = Modifier.size(160.dp),
-                painter = painterResource(id = level.taskLevelType.circleSourceByArtType(artType = level.taskArtType)),
+                painter = painterResource(id = level.taskLevelType.circleSourceByArtType(artType = level.artType)),
                 contentDescription = null,
 
             )

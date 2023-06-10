@@ -4,7 +4,7 @@ import com.culture.estet.core.funcional.onFailure
 import com.culture.estet.core.funcional.onSuccess
 import com.culture.estet.domain.models.tasks.Task
 import com.culture.estet.core.generateId
-import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.ArtType
 import com.culture.estet.domain.models.tasks.TaskLevelType
 import com.culture.estet.domain.repository.TaskRepository
 import com.culture.estet.ui.presentation.base.BaseViewModel
@@ -77,70 +77,70 @@ class TasksViewModel @Inject constructor(
 val list = listOf(
         Task(
             id = generateId(),
-            type = TaskArtType.MUSIC,
+            type = ArtType.MUSIC,
             level = TaskLevelType.BEGINNER,
             questionsCount = 6,
             answerCount = 4,
         ),
         Task(
             id = generateId(),
-            type = TaskArtType.THEATRE,
+            type = ArtType.THEATRE,
             level = TaskLevelType.BEGINNER,
             questionsCount = 6,
             answerCount = 4,
         ),
         Task(
             id = generateId(),
-            type = TaskArtType.DANCE,
+            type = ArtType.DANCE,
             level = TaskLevelType.BEGINNER,
             questionsCount = 6,
             answerCount = 4,
         ),
         Task(
             id = generateId(),
-            type = TaskArtType.THEATRE,
+            type = ArtType.THEATRE,
             level = TaskLevelType.EXPERT,
             questionsCount = 6,
             answerCount = 1,
         ),
         Task(
             id = generateId(),
-            type = TaskArtType.MUSIC,
+            type = ArtType.MUSIC,
             level = TaskLevelType.ADVANCED,
             questionsCount = 6,
             answerCount = 6,
         ),
         Task(
             id = generateId(),
-            type = TaskArtType.DANCE,
+            type = ArtType.DANCE,
             level = TaskLevelType.EXPERT,
             questionsCount = 6,
             answerCount = 4,
         ),
         Task(
             id = generateId(),
-            type = TaskArtType.MUSIC,
+            type = ArtType.MUSIC,
             level = TaskLevelType.BEGINNER,
             questionsCount = 6,
             answerCount = 4,
         ),
         Task(
             id = generateId(),
-            type = TaskArtType.THEATRE,
+            type = ArtType.THEATRE,
             level = TaskLevelType.BEGINNER,
             questionsCount = 6,
             answerCount = 4,
         ),
         Task(
             id = generateId(),
-            type = TaskArtType.DANCE,
+            type = ArtType.DANCE,
             level = TaskLevelType.BEGINNER,
             questionsCount = 6,
             answerCount = 4,
         ),
         Task(
             id = generateId(),
-            type = TaskArtType.THEATRE,
+            type = ArtType.THEATRE,
             level = TaskLevelType.EXPERT,
             questionsCount = 6,
             answerCount = 1,
