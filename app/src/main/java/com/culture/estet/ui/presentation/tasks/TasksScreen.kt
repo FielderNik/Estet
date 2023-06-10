@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.culture.estet.R
 import com.culture.estet.domain.models.tasks.TaskCategory
-import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.ArtType
 import com.culture.estet.ui.presentation.localcomposition.LocalAppScreenState
 import com.culture.estet.ui.presentation.localcomposition.LocalAppTopBarState
 import com.culture.estet.ui.presentation.navigation.tasks.QuestionnaireDestination
@@ -190,7 +190,7 @@ private fun TaskCategoryContent(
 }
 
 @Composable
-private fun TaskCategoryImage(artType: TaskArtType) {
+private fun TaskCategoryImage(artType: ArtType) {
     val iconId = artType.painterSource()
     Image(
         modifier = Modifier

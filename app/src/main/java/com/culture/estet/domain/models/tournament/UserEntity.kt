@@ -1,6 +1,6 @@
 package com.culture.estet.domain.models.tournament
 
-import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.ArtType
 
 data class UserEntity(
     val id: String,
@@ -11,12 +11,12 @@ data class UserEntity(
 )
 
 data class ArtScore(
-    val artType: TaskArtType,
+    val artType: ArtType,
     val score: Int,
 )
 
 
-fun UserEntity.toUser(artType: TaskArtType?): User {
+fun UserEntity.toUser(artType: ArtType?): User {
     return User(
         id = id,
         name = name,

@@ -5,6 +5,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.navigation.NavType
 import com.culture.estet.R
+import com.culture.estet.domain.models.ArtType
 
 enum class TaskLevelType {
     BEGINNER,
@@ -30,7 +31,7 @@ enum class TaskLevelType {
     }
 
     @DrawableRes
-    fun circleSourceByArtType(artType: TaskArtType): Int {
+    fun circleSourceByArtType(artType: ArtType): Int {
         return when(this) {
             BEGINNER -> beginnerCircleSource(artType)
             ADVANCED -> advancedCircleSource(artType)
@@ -39,32 +40,32 @@ enum class TaskLevelType {
     }
 
     @DrawableRes
-    private fun beginnerCircleSource(artType: TaskArtType): Int {
+    private fun beginnerCircleSource(artType: ArtType): Int {
         return when(artType) {
-            TaskArtType.MUSIC -> R.drawable.image_green_light_circle
-            TaskArtType.DANCE -> R.drawable.image_green_light_variant
-            TaskArtType.THEATRE -> R.drawable.image_pink_circle
-            TaskArtType.PAINTING -> R.drawable.image_pink_circle
+            ArtType.MUSIC -> R.drawable.image_green_light_circle
+            ArtType.DANCE -> R.drawable.image_green_light_variant
+            ArtType.THEATRE -> R.drawable.image_pink_circle
+            ArtType.PAINTING -> R.drawable.image_pink_circle
         }
     }
 
     @DrawableRes
-    private fun advancedCircleSource(artType: TaskArtType): Int {
+    private fun advancedCircleSource(artType: ArtType): Int {
         return when(artType) {
-            TaskArtType.MUSIC -> R.drawable.image_green_medium_circle
-            TaskArtType.DANCE -> R.drawable.image_green_circle
-            TaskArtType.THEATRE -> R.drawable.image_violet_circle
-            TaskArtType.PAINTING -> R.drawable.image_pink_dark_circle
+            ArtType.MUSIC -> R.drawable.image_green_medium_circle
+            ArtType.DANCE -> R.drawable.image_green_circle
+            ArtType.THEATRE -> R.drawable.image_violet_circle
+            ArtType.PAINTING -> R.drawable.image_pink_dark_circle
         }
     }
 
     @DrawableRes
-    private fun expertCircleSource(artType: TaskArtType): Int {
+    private fun expertCircleSource(artType: ArtType): Int {
         return when(artType) {
-            TaskArtType.MUSIC -> R.drawable.image_green_variant_circle
-            TaskArtType.DANCE -> R.drawable.image_blue_dark_circle
-            TaskArtType.THEATRE -> R.drawable.image_violet_dark
-            TaskArtType.PAINTING -> R.drawable.image_violet_dark
+            ArtType.MUSIC -> R.drawable.image_green_variant_circle
+            ArtType.DANCE -> R.drawable.image_blue_dark_circle
+            ArtType.THEATRE -> R.drawable.image_violet_dark
+            ArtType.PAINTING -> R.drawable.image_violet_dark
         }
     }
 }

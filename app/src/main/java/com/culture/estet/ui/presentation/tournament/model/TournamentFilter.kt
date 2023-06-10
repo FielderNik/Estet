@@ -2,7 +2,7 @@ package com.culture.estet.ui.presentation.tournament.model
 
 import androidx.annotation.StringRes
 import com.culture.estet.R
-import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.ArtType
 
 enum class TournamentFilter {
     ALL,
@@ -22,13 +22,13 @@ enum class TournamentFilter {
         }
     }
 
-    fun getArtTypeByFilter(): TaskArtType? {
+    fun getArtTypeByFilter(): ArtType? {
         return when(this) {
             ALL -> null
-            DANCE -> TaskArtType.DANCE
-            PAINTING -> TaskArtType.PAINTING
-            THEATRE -> TaskArtType.THEATRE
-            MUSIC -> TaskArtType.MUSIC
+            DANCE -> ArtType.DANCE
+            PAINTING -> ArtType.PAINTING
+            THEATRE -> ArtType.THEATRE
+            MUSIC -> ArtType.MUSIC
         }
     }
 }

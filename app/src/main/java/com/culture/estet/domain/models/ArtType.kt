@@ -1,4 +1,4 @@
-package com.culture.estet.domain.models.tasks
+package com.culture.estet.domain.models
 
 import android.os.Bundle
 import androidx.annotation.DrawableRes
@@ -8,7 +8,7 @@ import androidx.navigation.NavType
 import com.culture.estet.R
 import com.culture.estet.ui.theme.*
 
-enum class TaskArtType {
+enum class ArtType {
     MUSIC,
     DANCE,
     THEATRE,
@@ -16,7 +16,7 @@ enum class TaskArtType {
 
     @DrawableRes
     fun painterSource(): Int {
-        return when(this) {
+        return when (this) {
             MUSIC -> R.drawable.image_music
             DANCE -> R.drawable.image_dance
             THEATRE -> R.drawable.image_theatre
@@ -24,9 +24,19 @@ enum class TaskArtType {
         }
     }
 
+    @DrawableRes
+    fun pointSchoolSource(): Int {
+        return when (this) {
+            MUSIC -> R.drawable.school_point_music
+            DANCE -> R.drawable.school_point_dance
+            THEATRE -> R.drawable.school_point_theater
+            PAINTING -> R.drawable.school_point_painting
+        }
+    }
+
     @StringRes
     fun stringSource(): Int {
-        return when(this) {
+        return when (this) {
             MUSIC -> R.string.title_music
             DANCE -> R.string.title_dance
             THEATRE -> R.string.title_theatre
@@ -35,26 +45,32 @@ enum class TaskArtType {
     }
 
     fun background(isDarkTheme: Boolean): Color {
-        return when(this) {
+        return when (this) {
             MUSIC -> if (isDarkTheme) MusicBgDark else MusicBg
             DANCE -> if (isDarkTheme) DanceBgDark else DanceBg
             THEATRE -> if (isDarkTheme) TheatreBgDark else TheatreBg
             PAINTING -> if (isDarkTheme) PaintingBgDark else PaintingBg
         }
     }
+
+    companion object {
+        fun getById(id: Int): ArtType {
+            return ArtType.values()[id % ArtType.values().size]
+        }
+    }
 }
 
 
-class NavTasksArtType: NavType<TaskArtType>(isNullableAllowed = false) {
-    override fun get(bundle: Bundle, key: String): TaskArtType {
-        return bundle.getSerializable(key) as TaskArtType
+class NavTasksArtType : NavType<ArtType>(isNullableAllowed = false) {
+    override fun get(bundle: Bundle, key: String): ArtType {
+        return bundle.getSerializable(key) as ArtType
     }
 
-    override fun parseValue(value: String): TaskArtType {
-        return TaskArtType.valueOf(value)
+    override fun parseValue(value: String): ArtType {
+        return ArtType.valueOf(value)
     }
 
-    override fun put(bundle: Bundle, key: String, value: TaskArtType) {
+    override fun put(bundle: Bundle, key: String, value: ArtType) {
         bundle.putSerializable(key, value)
     }
 }
