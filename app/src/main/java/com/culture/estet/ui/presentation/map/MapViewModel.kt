@@ -13,8 +13,7 @@ import javax.inject.Inject
 class MapViewModel @Inject constructor(
     private val connectivityObserver: ConnectivityObserver,
     private val schoolRepository: SchoolsRepository,
-): BaseViewModel<MapScreenState, MapEffect, MapAction>(MapScreenState.Available(getMockSchools())) {
-
+): BaseViewModel<MapScreenState, MapEffect, MapAction>(MapScreenState.Available(emptyList())) {
     init {
         launchOnMain {
             handleNetworkStatus(connectivityObserver.currentConnection())
@@ -27,7 +26,7 @@ class MapViewModel @Inject constructor(
 
     private suspend fun handleNetworkStatus(status: ConnectivityObserver.Status) {
         Log.v("~", status.name)
-        when(status) {
+        when (status) {
             ConnectivityObserver.Status.AVAILABLE -> setState(MapScreenState.Available(getSchools()))
             ConnectivityObserver.Status.UNAVAILABLE -> setState(MapScreenState.Unavailable(getSchools()))
             ConnectivityObserver.Status.LOST -> setState(MapScreenState.Unavailable(getSchools()))

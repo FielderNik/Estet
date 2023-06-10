@@ -10,6 +10,9 @@ interface SchoolsDao {
     @Query("SELECT * FROM schools_entities_table")
     fun observeAll(): Flow<List<SchoolEntity>>
 
+    @Query("SELECT * FROM schools_entities_table")
+    suspend fun getAll(): List<SchoolEntity>?
+
     @Upsert
     suspend fun upsertAllSchools(task: List<SchoolEntity>)
 

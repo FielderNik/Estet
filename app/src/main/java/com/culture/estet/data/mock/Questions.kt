@@ -5,6 +5,7 @@ import com.culture.estet.domain.models.questions.Answer
 import com.culture.estet.domain.models.questions.Question
 import com.culture.estet.domain.models.questions.QuestionType
 
+/*
 object Questions {
 
     object Lite {
@@ -338,4 +339,4 @@ object Questions {
     }
 
 
-}
+}*/

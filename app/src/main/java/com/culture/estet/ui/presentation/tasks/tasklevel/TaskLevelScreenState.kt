@@ -1,7 +1,7 @@
 package com.culture.estet.ui.presentation.tasks.tasklevel
 
 import com.culture.estet.domain.models.tasks.TaskLevel
-import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.ArtType
 
 sealed class TaskLevelScreenState {
     object Loading : TaskLevelScreenState()
@@ -16,5 +16,5 @@ sealed class TaskLevelEffect {
 }
 
 sealed class TaskLevelAction {
-    data class Initialize(val userId: String, val artType: TaskArtType) : TaskLevelAction()
+    data class Initialize(val userId: String, val artType: ArtType) : TaskLevelAction()
 }

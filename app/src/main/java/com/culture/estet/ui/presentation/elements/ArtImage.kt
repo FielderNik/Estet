@@ -5,12 +5,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.ArtType
 
 @Composable
 fun ArtImage(
     modifier: Modifier = Modifier,
-    artType: TaskArtType,
+    artType: ArtType,
 ) {
     Image(
         modifier = modifier,

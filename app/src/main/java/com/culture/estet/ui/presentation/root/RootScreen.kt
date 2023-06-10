@@ -20,8 +20,8 @@ import com.culture.estet.ui.presentation.localcomposition.LocalDialogEventBus
 import com.culture.estet.ui.presentation.navigation.*
 import com.culture.estet.ui.presentation.states.AppScreenState
 import com.culture.estet.ui.presentation.states.AppTopBarState
-import com.culture.estet.ui.presentation.states.rememberAppTopBarState
 import com.culture.estet.ui.presentation.states.rememberAppScreenState
+import com.culture.estet.ui.presentation.states.rememberAppTopBarState
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -78,7 +78,7 @@ fun RootScreen(
         Scaffold(
             modifier = Modifier.fillMaxSize(),
             topBar = {
-                if (appTopBarState.isShowTopBar) {
+                AnimatedVisibility(visible = appTopBarState.isShowTopBar) {
                     AppTopBar(
                         title = appTopBarState.title,
                         isShowNavigateBack = appTopBarState.isShowBackNavigate,

@@ -21,6 +21,14 @@ interface RepositoryModule {
 
     @Binds
     @Singleton
+    fun bindAnswerRepository(answerRepositoryImpl: AnswerRepositoryImpl): AnswerRepository
+
+    @Binds
+    @Singleton
+    fun bindStatisticRepository(statisticsRepositoryImpl: StatisticsRepositoryImpl): StatisticsRepository
+
+    @Binds
+    @Singleton
     fun bindTaskRepository(taskRepositoryImpl: TaskRepositoryImpl): TaskRepository
 
     @Binds
@@ -34,4 +42,9 @@ interface RepositoryModule {
     @Binds
     @Singleton
     fun bindTournamentRepository(repository: TournamentRepositoryImpl): TournamentRepository
+
+
+    @Binds
+    @Singleton
+    fun bindUserRepository(repository: UserRepositoryImpl): UserRepository
 }

@@ -1,12 +1,14 @@
 package com.culture.estet.ui.presentation.tasks.questions
 
+import android.util.Log
 import com.culture.estet.core.funcional.onFailure
 import com.culture.estet.core.funcional.onSuccess
 import com.culture.estet.domain.models.questions.Answer
 import com.culture.estet.domain.models.questions.Question
-import com.culture.estet.domain.models.tasks.TaskArtType
+import com.culture.estet.domain.models.ArtType
 import com.culture.estet.domain.models.tasks.TaskLevelType
 import com.culture.estet.domain.repository.QuestionRepository
+import com.culture.estet.domain.repository.StatisticsRepository
 import com.culture.estet.ui.presentation.base.BaseViewModel
 import com.culture.estet.ui.presentation.tasks.questions.model.Statistics
 import com.culture.estet.ui.presentation.tasks.questions.model.Step
@@ -18,18 +20,20 @@ import javax.inject.Inject
 
 @HiltViewModel
 class QuestionsViewModel @Inject constructor(
-    private val questionRepository: QuestionRepository
+    private val questionRepository: QuestionRepository,
+    private val statisticsRepository: StatisticsRepository,
 ) : BaseViewModel<QuestionsScreenState, QuestionsEffects, QuestionsAction>(QuestionsScreenState()) {
 
     val steps: MutableSharedFlow<Step> = MutableSharedFlow()
     private val questionsQueue = ArrayDeque<Question>()
     private var currentStatistics: Statistics = Statistics(0,0, 0)
-    lateinit var currentArtType: TaskArtType
+    private var userId: String? = null
 
     override fun sendAction(action: QuestionsAction) {
         launchOnMain {
             when(action) {
                 is QuestionsAction.Initialize -> {
+                    userId = action.userId
                     loadQuestions(action.userId, action.artType, action.levelType)
                 }
 
@@ -56,7 +60,7 @@ class QuestionsViewModel @Inject constructor(
     }
 
     private suspend fun saveResult() {
-       //todo
+
     }
 
     private fun fillStatistics() {
@@ -89,6 +93,23 @@ class QuestionsViewModel @Inject constructor(
     }
 
     private suspend fun checkAnswer(selectedAnswer: Answer, currentQuestion: Question) {
+        saveStatistics(selectedAnswer, currentQuestion)
+    }
+
+    private suspend fun saveStatistics(selectedAnswer: Answer, currentQuestion: Question) {
+        userId?.also {
+
+            statisticsRepository.saveStatistics(userId = it, questionId = currentQuestion.id, selectedAnswerId = selectedAnswer.id)
+                .onFailure {
+                }
+                .onSuccess {
+
+                    handleAnswer(selectedAnswer, currentQuestion)
+                }
+        }
+    }
+
+    private suspend fun handleAnswer(selectedAnswer: Answer, currentQuestion: Question) {
         val step = if (selectedAnswer.isCorrect) {
             incrementCorrectAnswer()
             Step(
@@ -110,7 +131,7 @@ class QuestionsViewModel @Inject constructor(
         steps.emit(step)
     }
 
-    private suspend fun loadQuestions(userId: String, artType: TaskArtType, levelType: TaskLevelType) {
+    private suspend fun loadQuestions(userId: String, artType: ArtType, levelType: TaskLevelType) {
         withIo {
             questionRepository.getQuestionsByParameters(userId = userId, artType = artType, levelType = levelType)
         }

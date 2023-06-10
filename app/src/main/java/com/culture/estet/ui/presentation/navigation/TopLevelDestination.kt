@@ -17,31 +17,31 @@ enum class TopLevelDestination(
     TASK(
         route = TasksDestination.route,
         destination = TasksDestination.destination,
-        selectedIcon = R.drawable.icon_tasks,
-        unselectedIcon = R.drawable.icon_tasks,
+        selectedIcon = R.drawable.icon_tasks_28,
+        unselectedIcon = R.drawable.icon_tasks_28,
     ),
     TOURNAMENT(
         route = TournamentDestination.route,
         destination = TournamentDestination.destination,
-        selectedIcon = R.drawable.icon_tournament,
-        unselectedIcon = R.drawable.icon_tournament,
+        selectedIcon = R.drawable.icon_tournament_28,
+        unselectedIcon = R.drawable.icon_tournament_28,
     ),
     MAP(
         route = MapDestination.route,
         destination = MapDestination.destination,
-        selectedIcon = R.drawable.icon_map,
-        unselectedIcon = R.drawable.icon_map,
+        selectedIcon = R.drawable.icon_map_28,
+        unselectedIcon = R.drawable.icon_map_28,
     ),
     COURSES(
         route = CoursesDestination.route,
         destination = CoursesDestination.destination,
-        selectedIcon = R.drawable.icon_courses,
-        unselectedIcon = R.drawable.icon_courses,
+        selectedIcon = R.drawable.icon_courses_28,
+        unselectedIcon = R.drawable.icon_courses_28,
     ),
     FEED(
         route = FeedDestination.route,
         destination = FeedDestination.destination,
-        selectedIcon = R.drawable.icon_feed,
-        unselectedIcon = R.drawable.icon_feed,
+        selectedIcon = R.drawable.icon_feed_28,
+        unselectedIcon = R.drawable.icon_feed_28,
     )
 }

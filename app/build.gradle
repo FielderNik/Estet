@@ -21,9 +21,8 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
-
         resValue "string", "API_KEY", "558268b1-4054-4a48-b51e-4f6edc676020"
-
+        buildConfigField "String", "BASE_URL", "\"http://estetserver.tplinkdns.com:9090/\""
     }
 
     buildTypes {
@@ -47,6 +46,8 @@ android {
     }
     buildFeatures {
         compose true
+        buildConfig true
+
     }
     composeOptions {
         kotlinCompilerExtensionVersion '1.4.5'
@@ -112,4 +113,7 @@ dependencies {
 
     //coil
     implementation("io.coil-kt:coil-compose:2.4.0")
+
+    //datastore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
 }
